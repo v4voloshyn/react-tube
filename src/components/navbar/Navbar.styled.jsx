@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const NavContainer = styled.div`
 	position: sticky;
 	top: 0;
 	background-color: ${({ theme }) => theme.bgLighterColor};
 	height: 56px;
 `;
 
-export const Wrapper = styled.div`
+export const NavWrapper = styled.div`
 	position: relative;
 	height: 100%;
 	display: flex;
@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
 	justify-content: flex-end;
 `;
 
-export const Search = styled.div`
+export const NavSearch = styled.div`
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -30,7 +30,7 @@ export const Search = styled.div`
 	border-radius: 5px;
 `;
 
-export const Input = styled.input`
+export const NavInput = styled.input`
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -38,7 +38,7 @@ export const Input = styled.input`
 	background-color: transparent;
 `;
 
-export const Button = styled.button`
+export const NavButton = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;

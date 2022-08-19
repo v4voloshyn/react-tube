@@ -1,20 +1,20 @@
 import { Person, SearchOutlined } from '@mui/icons-material';
 import React from 'react';
-import { Button, Container, Input, Search, Wrapper } from './Navbar.styled';
+import { NavButton, NavContainer, NavInput, NavSearch, NavWrapper } from './Navbar.styled';
 
 export const Navbar = () => {
 	return (
-		<Container>
-			<Wrapper>
-				<Search>
-					<Input placeholder='Search' />
+		<NavContainer>
+			<NavWrapper>
+				<NavSearch>
+					<NavInput placeholder='Search' />
 					<SearchOutlined />
-				</Search>
-				<Button>
+				</NavSearch>
+				<NavButton>
 					<Person />
 					SIGN IN
-				</Button>
-			</Wrapper>
-		</Container>
+				</NavButton>
+			</NavWrapper>
+		</NavContainer>
 	);
 };
