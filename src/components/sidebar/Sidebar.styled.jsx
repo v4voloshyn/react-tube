@@ -50,6 +50,7 @@ export const Login = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
+
 export const Button = styled.button`
 	display: flex;
 	align-items: center;

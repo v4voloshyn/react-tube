@@ -1,15 +1,5 @@
 import React from 'react';
-import {
-	Button,
-	Container,
-	Hr,
-	Img,
-	Item,
-	Login,
-	Logo,
-	Title,
-	Wrapper,
-} from './Sidebar.styled';
+import { Button, Container, Hr, Img, Item, Login, Logo, Title, Wrapper } from './Sidebar.styled';
 import LogoImg from '../../assets/logo.webp';
 import {
 	Home as HomeIcon,
