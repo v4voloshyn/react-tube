@@ -6,8 +6,8 @@ export const Container = styled.div`
 
 export const Main = styled.div`
 	flex: 7;
-	background-color: #161c27;
-	color: #fff;
+	background-color: ${({ theme }) => theme.bgColor};
+	color: ${({ theme }) => theme.textColor};
 `;
 
 export const Wrapper = styled.div``;

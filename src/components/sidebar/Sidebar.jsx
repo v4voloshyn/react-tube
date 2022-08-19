@@ -7,8 +7,9 @@ import {
 	Item,
 	Login,
 	Logo,
+	Title,
 	Wrapper,
-} from './Menu.styled';
+} from './Sidebar.styled';
 import LogoImg from '../../assets/logo.webp';
 import {
 	Home as HomeIcon,
@@ -28,8 +29,8 @@ import {
 	SettingsBrightness,
 	Person,
 } from '@mui/icons-material';
-
-export const Menu = () => {
+console.log('first');
+export const Sidebar = ({ changeTheme, isDarkMode }) => {
 	return (
 		<Container>
 			<Wrapper>
@@ -67,6 +68,7 @@ export const Menu = () => {
 					</Button>
 				</Login>
 				<Hr />
+				<Title>Best of react tube</Title>
 				<Item>
 					<LibraryMusic />
 					Music
@@ -104,9 +106,9 @@ export const Menu = () => {
 					<LiveHelp />
 					Help
 				</Item>
-				<Item>
+				<Item onClick={changeTheme}>
 					<SettingsBrightness />
-					Mode
+					{isDarkMode ? 'Light theme' : 'Dark theme'}
 				</Item>
 			</Wrapper>
 		</Container>

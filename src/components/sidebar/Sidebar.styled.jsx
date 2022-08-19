@@ -4,14 +4,24 @@ export const Container = styled.div`
 	position: sticky;
 	top: 0;
 	flex: 1;
-	background-color: #27344e;
+	background-color: ${({ theme }) => theme.bgLighterColor};
 	height: 100vh;
-	color: #fff;
+	color: ${({ theme }) => theme.textColor};
+	height: 100vh;
 	font-size: 16px;
+	overflow-y: auto;
 `;
 
 export const Wrapper = styled.div`
 	padding: 18px 25px;
+`;
+
+export const Title = styled.h2`
+	font-size: 14px;
+	font-weight: 500;
+	color: #aaa;
+	margin-bottom: 20px;
+	text-transform: uppercase;
 `;
 
 export const Logo = styled.div`
@@ -58,6 +68,7 @@ export const Button = styled.button`
 
 export const Hr = styled.hr`
 	margin: 15px 0;
-	border: 0.5px solid #364564;
+	border: 0.5px solid;
+	border-color: ${({ theme }) => theme.hrColor};
 	border-radius: 15px;
 `;
