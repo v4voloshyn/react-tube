@@ -36,6 +36,7 @@ export const NavInput = styled.input`
 	height: 100%;
 	border: none;
 	background-color: transparent;
+	outline: none;
 `;
 
 export const NavButton = styled.button`
