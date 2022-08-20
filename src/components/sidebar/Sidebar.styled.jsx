@@ -6,6 +6,8 @@ export const Container = styled.div`
 	flex: 1;
 	background-color: ${({ theme }) => theme.bgLighterColor};
 	height: 100vh;
+	min-width: 220px;
+	max-width: 300px;
 	color: ${({ theme }) => theme.textColor};
 	height: 100vh;
 	font-size: 16px;
