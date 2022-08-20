@@ -16,7 +16,6 @@
  - [ ] Add Recomendation Sidebar
  - [ ] Add Login page
  - [ ] Refactor styles using Props
+ - [ ] Make Main page with Cards using Grid-flow instead of Flexbox
   - **Backend:**
  - [ ] TBD
-
-
