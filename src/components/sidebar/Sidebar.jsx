@@ -19,13 +19,17 @@ import {
 	SettingsBrightness,
 	Person,
 } from '@mui/icons-material';
+import { SCLink } from '../UI/Link.styled';
 console.log('first');
+
 export const Sidebar = ({ changeTheme, isDarkMode }) => {
 	return (
 		<Container>
 			<Wrapper>
 				<Logo>
-					<Img src={LogoImg} /> React Tube
+					<SCLink to='/'>
+						<Img src={LogoImg} /> React Tube
+					</SCLink>
 				</Logo>
 				<Item>
 					<HomeIcon />
