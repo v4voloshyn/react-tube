@@ -30,8 +30,6 @@ export const App = () => {
 						</Routes>
 						<Outlet />
 					</AppWrapper>
-
-					<h1>test</h1>
 				</AppMain>
 			</AppContainer>
 		</ThemeProvider>
