@@ -12,7 +12,7 @@ import {
 
 import CardPoster from '../../assets/post1.jpg';
 import ChannelAvatarImg from '../../assets/boriska.jpg';
-import { SCLink } from '../UI/Link.styled';
+import { SCLink } from '../UI';
 export const Card = () => {
 	return (
 		<SCLink to='video/test123'>

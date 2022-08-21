@@ -19,7 +19,7 @@ import {
 	SettingsBrightness,
 	Person,
 } from '@mui/icons-material';
-import { SCLink } from '../UI/Link.styled';
+import { SCLink } from '../UI';
 console.log('first');
 
 export const Sidebar = ({ changeTheme, isDarkMode }) => {

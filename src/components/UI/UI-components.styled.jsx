@@ -10,3 +10,10 @@ export const SCLink = styled(Link)`
 		color: ${({ theme }) => theme.textColor};
 	}
 `;
+
+export const Hr = styled.hr`
+	margin: 15px 0;
+	border: 0.5px solid;
+	border-color: ${({ theme }) => theme.hrColor};
+	border-radius: 15px;
+`;
