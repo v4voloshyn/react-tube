@@ -7,5 +7,6 @@ export const CWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
-	width: 95%;
+	width: 100%;
+	padding-right: 20px;
 `;

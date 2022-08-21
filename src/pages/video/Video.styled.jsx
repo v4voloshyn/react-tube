@@ -7,11 +7,11 @@ export const VideoContainer = styled.div`
 `;
 
 export const Content = styled.div`
-	flex: 5;
+	flex: 6;
 `;
 
 export const Recomendations = styled.div`
-	flex: 2;
+	flex: 2.5;
 `;
 
 export const VideoBody = styled.div`
