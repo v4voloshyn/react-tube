@@ -20,7 +20,8 @@ import {
 } from './Video.styled';
 
 import { ThumbUp, ThumbDown, Share } from '@mui/icons-material';
-import { Hr } from '../../components/sidebar/Sidebar.styled';
+import { Hr } from '../../components/UI';
+import { Comments } from '../../components/comment';
 import ChanelLogo from '../../assets/boriska.jpg';
 
 export const Video = () => {
@@ -33,12 +34,14 @@ export const Video = () => {
 						height='100%'
 						src='https://www.youtube.com/embed/JUXRMuDoVm4'
 						title='YouTube video player'
-						frameborder='0'
+						frameBorder='0'
 						allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-						allowfullscreen
+						allowFullScreen
 					></iframe>
 				</VideoBody>
-				<VideoTitle>Video Title</VideoTitle>
+				<VideoTitle>
+					Typescript + Node.js tutorial. You definitely should learn this topic
+				</VideoTitle>
 				<VideoDetails>
 					<VideoInfo>3,425,777 views * Aug 22, 2022</VideoInfo>
 					<VideoButtons>
@@ -68,6 +71,8 @@ export const Video = () => {
 					</ChannelInfo>
 					<SubscribeBtn>Subscribe</SubscribeBtn>
 				</Channel>
+				<Hr />
+				<Comments></Comments>
 			</Content>
 			<Recomendations>Video Recomendation</Recomendations>
 		</VideoContainer>

@@ -15,15 +15,13 @@ export const Recomendations = styled.div`
 `;
 
 export const VideoBody = styled.div`
-	min-height: 25vh;
 	max-height: 50vh;
-	min-width: 30vw;
 	width: 100%;
 	aspect-ratio: 16 / 9;
 `;
 
 export const VideoTitle = styled.h1`
-	font-size: 18px;
+	font-size: 1.25rem;
 	font-weight: 500;
 	padding: 20px 0 10px 10px;
 	color: ${({ theme }) => theme.textColor};
@@ -31,16 +29,17 @@ export const VideoTitle = styled.h1`
 
 export const VideoDetails = styled.div`
 	padding-left: 10px;
+	margin-bottom: -5px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	gap: 25px;
 	flex-wrap: wrap;
+	color: ${({ theme }) => theme.textSoftColor};
 `;
 
 export const VideoInfo = styled.span`
-	font-size: 14px;
-	color: ${({ theme }) => theme.textColor};
+	font-size: 0.8rem;
 	flex: 1 0 auto;
 	width: max-content;
 `;
@@ -87,10 +86,10 @@ export const ChannelDetail = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
+	color: ${({ theme }) => theme.textColor};
 `;
 
 export const ChannelName = styled.span`
-	color: ${({ theme }) => theme.textColor};
 	font-weight: 500;
 `;
 
@@ -101,8 +100,7 @@ export const ChannelCounter = styled.span`
 
 export const ChannelDescr = styled.p`
 	padding-top: 10px;
-	font-size: 14px;
-	color: ${({ theme }) => theme.textColor};
+	font-size: 0.9rem;
 `;
 
 export const SubscribeBtn = styled.button`
