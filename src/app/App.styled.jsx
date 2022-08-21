@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const AppContainer = styled.div`
 	display: flex;
+	min-height: 100vh;
 `;
 
-export const Main = styled.div`
+export const AppMain = styled.div`
 	flex: 7;
 	background-color: ${({ theme }) => theme.bgColor};
 	color: ${({ theme }) => theme.textColor};
 `;
 
-export const Wrapper = styled.div``;
+export const AppWrapper = styled.div``;

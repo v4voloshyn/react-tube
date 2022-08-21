@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { Sidebar } from '../components/sidebar';
-import { Navbar } from '../components/navbar';
+import { Sidebar, Navbar } from '../components';
 import { darkTheme, lightTheme } from '../utils/theme';
-import { Container, Main, Wrapper } from './App.styled';
+import { AppContainer, AppMain, AppWrapper } from './App.styled';
+import { Route, Routes, Outlet } from 'react-router-dom';
+import { Home, Video } from '../pages';
 
 export const App = () => {
 	const [isDarkMode, setDarkMode] = useState(true);
@@ -14,25 +15,23 @@ export const App = () => {
 	const currentTheme = isDarkMode ? darkTheme : lightTheme;
 	return (
 		<ThemeProvider theme={currentTheme}>
-			<Container>
+			<AppContainer>
 				<Sidebar changeTheme={changeThemeMode} isDarkMode={isDarkMode} />
-				<Main>
+				<AppMain>
 					<Navbar />
-					<Wrapper>Video Cards</Wrapper>
-					<h1>test</h1>
-					<h1>test</h1>
-					<h1>test</h1>
-					<h1>test</h1>
-					<h1>test</h1>
-					<h1>test</h1>
-					<h1>test</h1>
-					<h1>test</h1>
-					<h1>test</h1>
-					<h1>test</h1>
-					<h1>test</h1>
-					<h1>test</h1>
-				</Main>
-			</Container>
+					<AppWrapper>
+						<Routes>
+							<Route path='/'>
+								<Route index element={<Home />} />
+								<Route path='video'>
+									<Route path=':id' element={<Video />} />
+								</Route>
+							</Route>
+						</Routes>
+						<Outlet />
+					</AppWrapper>
+				</AppMain>
+			</AppContainer>
 		</ThemeProvider>
 	);
 };

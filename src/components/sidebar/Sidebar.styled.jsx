@@ -5,7 +5,8 @@ export const Container = styled.div`
 	top: 0;
 	flex: 1;
 	background-color: ${({ theme }) => theme.bgLighterColor};
-	height: 100vh;
+	min-width: 220px;
+	max-width: 300px;
 	color: ${({ theme }) => theme.textColor};
 	height: 100vh;
 	font-size: 16px;
@@ -50,6 +51,7 @@ export const Login = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
+
 export const Button = styled.button`
 	display: flex;
 	align-items: center;
@@ -64,11 +66,4 @@ export const Button = styled.button`
 	cursor: pointer;
 	gap: 8px;
 	font-weight: 500;
-`;
-
-export const Hr = styled.hr`
-	margin: 15px 0;
-	border: 0.5px solid;
-	border-color: ${({ theme }) => theme.hrColor};
-	border-radius: 15px;
 `;
