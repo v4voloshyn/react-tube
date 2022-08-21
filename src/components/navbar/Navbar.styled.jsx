@@ -5,6 +5,7 @@ export const NavContainer = styled.div`
 	top: 0;
 	background-color: ${({ theme }) => theme.bgLighterColor};
 	height: 56px;
+	z-index: 1;
 `;
 
 export const NavWrapper = styled.div`

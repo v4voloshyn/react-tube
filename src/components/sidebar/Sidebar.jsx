@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Hr, Img, Item, Login, Logo, Title, Wrapper } from './Sidebar.styled';
+import { Button, Container, Img, Item, Login, Logo, Title, Wrapper } from './Sidebar.styled';
 import LogoImg from '../../assets/logo.webp';
 import {
 	Home as HomeIcon,
@@ -19,8 +19,7 @@ import {
 	SettingsBrightness,
 	Person,
 } from '@mui/icons-material';
-import { SCLink } from '../UI';
-console.log('first');
+import { SCLink, Hr } from '../UI';
 
 export const Sidebar = ({ changeTheme, isDarkMode }) => {
 	return (
