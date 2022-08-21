@@ -12,6 +12,7 @@ export const Content = styled.div`
 
 export const Recomendations = styled.div`
 	flex: 2.5;
+	padding-right: 10px;
 `;
 
 export const VideoBody = styled.div`
