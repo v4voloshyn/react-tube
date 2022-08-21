@@ -13,19 +13,19 @@ import {
 import CardPoster from '../../assets/post1.jpg';
 import ChannelAvatarImg from '../../assets/boriska.jpg';
 import { SCLink } from '../UI';
-export const Card = () => {
+export const Card = ({ type }) => {
 	return (
-		<SCLink to='video/test123'>
-			<CardContainer>
-				<CardImage src={CardPoster} />
-				<CardDetailsWrapper>
-					<ChannelAvatar src={ChannelAvatarImg} />
-					<CardDetails>
-						<CardTitle>
+		<SCLink to='/video/test123'>
+			<CardContainer type={type}>
+				<CardImage src={CardPoster} type={type} />
+				<CardDetailsWrapper type={type}>
+					<ChannelAvatar src={ChannelAvatarImg} type={type} />
+					<CardDetails type={type}>
+						<CardTitle type={type}>
 							Typescript + Node.js tutorial. You definitely should learn this topic
 						</CardTitle>
 						<ChannelName>Barbariska Johnsonuk</ChannelName>
-						<Info>Added 20 min ago</Info>
+						<Info>299K views * Added 20 min ago</Info>
 					</CardDetails>
 				</CardDetailsWrapper>
 			</CardContainer>
