@@ -37,6 +37,7 @@ export const NavInput = styled.input`
 	border: none;
 	background-color: transparent;
 	outline: none;
+	color: ${({ theme }) => theme.textColor};
 `;
 
 export const NavButton = styled.button`

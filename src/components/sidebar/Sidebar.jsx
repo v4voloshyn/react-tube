@@ -102,7 +102,7 @@ export const Sidebar = ({ changeTheme, isDarkMode }) => {
 				</Item>
 				<Item onClick={changeTheme}>
 					<SettingsBrightness />
-					{isDarkMode ? 'Light theme' : 'Dark theme'}
+					{isDarkMode ? 'Light ' : 'Dark '}theme
 				</Item>
 			</Wrapper>
 		</Container>

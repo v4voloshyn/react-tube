@@ -24,7 +24,7 @@ export const Card = () => {
 						<CardTitle>
 							Typescript + Node.js tutorial. You definitely should learn this topic
 						</CardTitle>
-						<ChannelName>Boriska Johnsonuk</ChannelName>
+						<ChannelName>Barbariska Johnsonuk</ChannelName>
 						<Info>Added 20 min ago</Info>
 					</CardDetails>
 				</CardDetailsWrapper>
