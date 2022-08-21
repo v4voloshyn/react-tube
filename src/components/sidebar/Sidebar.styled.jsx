@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+export const Item = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	cursor: pointer;
+	padding: 7.5px 0;
+	transition: background-color, 0.3s ease;
+	border-radius: 3px;
+`;
+
 export const Container = styled.div`
 	position: sticky;
 	top: 0;
@@ -11,6 +21,13 @@ export const Container = styled.div`
 	height: 100vh;
 	font-size: 16px;
 	overflow-y: auto;
+
+	${Item} {
+		&:hover,
+		&:focus {
+			background-color: rgba(0, 0, 0, 0.1);
+		}
+	}
 `;
 
 export const Wrapper = styled.div`
@@ -37,14 +54,6 @@ export const Logo = styled.div`
 
 export const Img = styled.img`
 	height: 25px;
-`;
-
-export const Item = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 15px;
-	cursor: pointer;
-	padding: 7.5px 0;
 `;
 
 export const Login = styled.div`

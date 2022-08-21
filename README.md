@@ -12,14 +12,14 @@
  #### TODO:
  - **Frontend:**
  - [x] Make Card component
- - [ ] Add single Video Page. Need to create:
- - - [ ] Video Info Section
- - - [ ] Comments Section:
- - - - [ ] Create-comment-form component
- - - - [ ] Single comment component
- -  - [ ] Recomendation Sidebar
+ - [x] Add single Video Page. Need to create:
+ - - [x] Video Info Section
+ - - [x] Comments Section:
+ - - - [x] Create-comment-form component
+ - - - [x] Single comment component
+ -  - [x] Recomendation Sidebar
  - [ ] Add Login page
- - [ ] Refactor styles using Props
+ - [x] Refactor Card styles using Props
  - [ ] Make Main page with Cards using Grid-flow instead of Flexbox
  - [ ] Reduce styles by creating reusable UI-Components
   - **Backend:**

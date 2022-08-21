@@ -23,6 +23,7 @@ import { ThumbUp, ThumbDown, Share } from '@mui/icons-material';
 import { Hr } from '../../components/UI';
 import { Comments } from '../../components/comment';
 import ChanelLogo from '../../assets/boriska.jpg';
+import { Card } from '../../components/card';
 
 export const Video = () => {
 	return (
@@ -74,7 +75,16 @@ export const Video = () => {
 				<Hr />
 				<Comments></Comments>
 			</Content>
-			<Recomendations>Video Recomendation</Recomendations>
+			<Recomendations>
+				<Card type='sm' />
+				<Card type='sm' />
+				<Card type='sm' />
+				<Card type='sm' />
+				<Card type='sm' />
+				<Card type='sm' />
+				<Card type='sm' />
+				<Card type='sm' />
+			</Recomendations>
 		</VideoContainer>
 	);
 };
