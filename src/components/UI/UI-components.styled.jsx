@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const SCLink = styled(Link)`
+	display: flex;
+	gap: 3px;
+	align-items: center;
 	font-family: inherit;
 	text-decoration: none;
 	color: ${({ theme }) => theme.textColor};
@@ -9,6 +12,17 @@ export const SCLink = styled(Link)`
 	&:visited {
 		color: ${({ theme }) => theme.textColor};
 	}
+`;
+
+export const Logo = styled.div`
+	height: 100%;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	font-weight: bold;
+	font-size: 1.5rem;
+	white-space: nowrap;
+	padding-left: 40px;
 `;
 
 export const LinkBtn = styled(Link)`
@@ -29,6 +43,7 @@ export const LinkBtn = styled(Link)`
 
 export const Hr = styled.hr`
 	margin: 15px 0;
+	width: 100%;
 	border: 0.5px solid;
 	border-color: ${({ theme }) => theme.hrColor};
 	border-radius: 15px;
