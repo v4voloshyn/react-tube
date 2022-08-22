@@ -14,7 +14,7 @@ export const NavWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 0 20px;
-	justify-content: flex-end;
+	justify-content: space-between;
 `;
 
 export const NavSearch = styled.div`

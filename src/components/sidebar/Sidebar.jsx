@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Img, Item, Login, Logo, Title, Wrapper } from './Sidebar.styled';
+import { Container, Img, Item, Login, Title, Wrapper } from './Sidebar.styled';
 import LogoImg from '../../assets/logo.webp';
 import {
 	Home as HomeIcon,
@@ -19,7 +19,7 @@ import {
 	SettingsBrightness,
 	Person,
 } from '@mui/icons-material';
-import { SCLink, Hr, LinkBtn } from '../UI';
+import { SCLink, Hr, LinkBtn, Logo } from '../UI';
 
 export const Sidebar = ({ changeTheme, isDarkMode }) => {
 	return (
@@ -27,7 +27,7 @@ export const Sidebar = ({ changeTheme, isDarkMode }) => {
 			<Wrapper>
 				<Logo>
 					<SCLink to='/'>
-						<Img src={LogoImg} /> React Tube
+						<Img src={LogoImg} /> UATube
 					</SCLink>
 				</Logo>
 				<Item>
