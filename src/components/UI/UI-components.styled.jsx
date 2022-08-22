@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const SCLink = styled(Link)`
 	display: flex;
-	gap: 3px;
+	gap: 6px;
 	align-items: center;
 	font-family: inherit;
 	text-decoration: none;
@@ -15,14 +15,15 @@ export const SCLink = styled(Link)`
 `;
 
 export const Logo = styled.div`
+	position: relative;
+	padding-left: 40px;
 	height: 100%;
 	display: flex;
 	align-items: center;
-	gap: 5px;
-	font-weight: bold;
-	font-size: 1.5rem;
+	gap: 10px;
+	font-weight: 500;
+	font-size: 1.4rem;
 	white-space: nowrap;
-	padding-left: 40px;
 `;
 
 export const LinkBtn = styled(Link)`

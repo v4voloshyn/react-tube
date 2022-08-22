@@ -12,16 +12,27 @@ export const Item = styled.div`
 `;
 
 export const Container = styled.div`
-	position: sticky;
+	position: fixed;
 	top: 0;
+	left: 0;
 	flex: 1;
 	background-color: ${({ theme }) => theme.bgLighterColor};
-	min-width: 220px;
+	min-width: 240px;
 	max-width: 300px;
 	color: ${({ theme }) => theme.textColor};
 	height: 100vh;
 	font-size: 16px;
 	overflow-y: auto;
+	transition: transform 0.3s ease-in-out;
+	transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(-100%)')};
+	z-index: 1;
+`;
+
+export const Wrapper = styled.div`
+	padding: 12px 20px 20px 20px;
+	& > ${Item}:nth-child(2) {
+		margin-top: 20px;
+	}
 
 	${Item} {
 		&:hover,
@@ -29,10 +40,6 @@ export const Container = styled.div`
 			background-color: rgba(0, 0, 0, 0.1);
 		}
 	}
-`;
-
-export const Wrapper = styled.div`
-	padding: 18px 25px;
 `;
 
 export const Title = styled.h2`
@@ -62,6 +69,6 @@ export const Login = styled.div`
 	flex-direction: column;
 
 	& > ${LinkBtn} {
-		margin-top: 10px;
+		margin-top: 15px;
 	}
 `;
