@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { LinkBtn } from '../UI';
 
 export const Item = styled.div`
 	display: flex;
@@ -59,20 +60,8 @@ export const Img = styled.img`
 export const Login = styled.div`
 	display: flex;
 	flex-direction: column;
-`;
 
-export const Button = styled.button`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 5px 15px;
-	background-color: transparent;
-	border: 1px solid #3ea6ff;
-	color: #3ea6ff;
-	font-weight: 500;
-	margin-top: 10px;
-	border-radius: 3px;
-	cursor: pointer;
-	gap: 8px;
-	font-weight: 500;
+	& > ${LinkBtn} {
+		margin-top: 10px;
+	}
 `;

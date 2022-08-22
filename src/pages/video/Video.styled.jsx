@@ -64,7 +64,7 @@ export const Channel = styled.div`
 	position: relative;
 	display: flex;
 	justify-content: space-between;
-	padding-left: 10px;
+	padding-left: 15px;
 `;
 
 export const ChannelInfo = styled.div`

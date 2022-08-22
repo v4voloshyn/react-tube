@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Img, Item, Login, Logo, Title, Wrapper } from './Sidebar.styled';
+import { Container, Img, Item, Login, Logo, Title, Wrapper } from './Sidebar.styled';
 import LogoImg from '../../assets/logo.webp';
 import {
 	Home as HomeIcon,
@@ -19,7 +19,7 @@ import {
 	SettingsBrightness,
 	Person,
 } from '@mui/icons-material';
-import { SCLink, Hr } from '../UI';
+import { SCLink, Hr, LinkBtn } from '../UI';
 
 export const Sidebar = ({ changeTheme, isDarkMode }) => {
 	return (
@@ -55,10 +55,10 @@ export const Sidebar = ({ changeTheme, isDarkMode }) => {
 				<Hr />
 				<Login>
 					Sign in to like videos, comment, and subscribe.
-					<Button>
+					<LinkBtn to='signin'>
 						<Person />
 						SIGN IN
-					</Button>
+					</LinkBtn>
 				</Login>
 				<Hr />
 				<Title>Best of react tube</Title>
