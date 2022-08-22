@@ -9,18 +9,26 @@
  - Node.js, Express, JWT for authorization;
  - MongoDB for storing user data and as a cloud storage;
 
- #### TODO:
- - **Frontend:**
- - [x] Make Card component
- - [x] Add single Video Page. Need to create:
- - - [x] Video Info Section
- - - [x] Comments Section:
- - - - [x] Create-comment-form component
- - - - [x] Single comment component
- -  - [x] Recomendation Sidebar
- - [ ] Add Login page
- - [x] Refactor Card styles using Props
- - [ ] Make Main page with Cards using Grid-flow instead of Flexbox
- - [ ] Reduce styles by creating reusable UI-Components
-  - **Backend:**
- - [ ] TBD
+ #### 📝 **TODO**:
+🔷 **Frontend:**
+ - ✅ Make Card component
+ - ✅ Add single Video Page. Need to create:
+ - - ✅ Video Info Section
+ - - ✅ Comments Section:
+ - - - ✅ Create-comment-form component
+ - - - ✅ Single comment component
+ -  - ✅ Recomendation Sidebar
+ - ✅ Add Login page
+ - ✅ Refactor Card styles using Props
+ - ✅ Add Burger component;
+ - ✅ Make Nav Sidebar absolute with slide effect
+ - ⬜ Be good to do:
+ - - ⬜ Add Overlay when Sidebar is open
+ - - ⬜ Prevent outside click and scroll Sidebar is open
+ - - ⬜ Make Main page with Cards using Grid-flow instead of Flexbox
+ - ⬜ Reduce styles by creating reusable UI-Components (need to determine)
+
+🔶 **Backend:**
+ - ⬜ TBD
+
+marks: ✅ ⬜ 🔘 🔻 ❌ ✔️ 🔷 🔶 🔺 🔴 ☑️ ➖ ➕
