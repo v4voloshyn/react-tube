@@ -64,23 +64,13 @@ export const Channel = styled.div`
 	position: relative;
 	display: flex;
 	justify-content: space-between;
-	padding-left: 10px;
+	padding-left: 15px;
 `;
 
 export const ChannelInfo = styled.div`
 	display: flex;
 	column-gap: 10px;
 	justify-content: space-between;
-`;
-
-export const ChannelImg = styled.img`
-	// TODO: replace into UI compponent
-	width: 45px;
-	height: 45px;
-	border-radius: 50%;
-	background-color: #999;
-	object-fit: fill;
-	flex: 0 0 auto;
 `;
 
 export const ChannelDetail = styled.div`
@@ -117,6 +107,7 @@ export const SubscribeBtn = styled.button`
 	border-radius: 3px;
 	color: #fff;
 	cursor: pointer;
+
 	&:hover {
 		background-color: #ff2600;
 	}

@@ -3,8 +3,8 @@ import { ThemeProvider } from 'styled-components';
 import { Sidebar, Navbar } from '../components';
 import { darkTheme, lightTheme } from '../utils/theme';
 import { AppContainer, AppMain, AppWrapper } from './App.styled';
-import { Route, Routes, Outlet } from 'react-router-dom';
-import { Home, Video } from '../pages';
+import { Route, Routes } from 'react-router-dom';
+import { Home, SignIn, Video } from '../pages';
 
 export const App = () => {
 	const [isDarkMode, setDarkMode] = useState(true);
@@ -23,12 +23,12 @@ export const App = () => {
 						<Routes>
 							<Route path='/'>
 								<Route index element={<Home />} />
+								<Route path='signin' element={<SignIn />} />
 								<Route path='video'>
 									<Route path=':id' element={<Video />} />
 								</Route>
 							</Route>
 						</Routes>
-						<Outlet />
 					</AppWrapper>
 				</AppMain>
 			</AppContainer>

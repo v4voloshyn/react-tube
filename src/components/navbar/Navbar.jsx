@@ -1,6 +1,7 @@
 import { Person, SearchOutlined } from '@mui/icons-material';
 import React from 'react';
-import { NavButton, NavContainer, NavInput, NavSearch, NavWrapper } from './Navbar.styled';
+import { LinkBtn } from '../UI';
+import { NavContainer, NavInput, NavSearch, NavWrapper } from './Navbar.styled';
 
 export const Navbar = () => {
 	return (
@@ -10,10 +11,10 @@ export const Navbar = () => {
 					<NavInput placeholder='Search' />
 					<SearchOutlined />
 				</NavSearch>
-				<NavButton>
+				<LinkBtn to='signin'>
 					<Person />
 					SIGN IN
-				</NavButton>
+				</LinkBtn>
 			</NavWrapper>
 		</NavContainer>
 	);
