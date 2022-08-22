@@ -12,8 +12,9 @@ export const Item = styled.div`
 `;
 
 export const Container = styled.div`
-	position: sticky;
+	position: fixed;
 	top: 0;
+	left: 0;
 	flex: 1;
 	background-color: ${({ theme }) => theme.bgLighterColor};
 	min-width: 240px;
@@ -22,6 +23,9 @@ export const Container = styled.div`
 	height: 100vh;
 	font-size: 16px;
 	overflow-y: auto;
+	transition: transform 0.3s ease-in-out;
+	transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(-100%)')};
+	z-index: 1;
 `;
 
 export const Wrapper = styled.div`
@@ -65,6 +69,6 @@ export const Login = styled.div`
 	flex-direction: column;
 
 	& > ${LinkBtn} {
-		margin-top: 10px;
+		margin-top: 15px;
 	}
 `;

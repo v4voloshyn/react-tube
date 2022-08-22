@@ -21,9 +21,9 @@ import {
 } from '@mui/icons-material';
 import { SCLink, Hr, LinkBtn, Logo } from '../UI';
 
-export const Sidebar = ({ changeTheme, isDarkMode }) => {
+export const Sidebar = ({ changeTheme, isDarkMode, open, menuRef }) => {
 	return (
-		<Container>
+		<Container open={open} ref={menuRef}>
 			<Wrapper>
 				<Logo>
 					<SCLink to='/'>

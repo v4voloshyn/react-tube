@@ -4,9 +4,10 @@ import { LinkBtn, Logo, SCLink } from '../UI';
 import { NavContainer, NavInput, NavSearch, NavWrapper } from './Navbar.styled';
 import LogoImg from '../../assets/logo.webp';
 
-export const Navbar = () => {
+export const Navbar = ({ children }) => {
 	return (
 		<NavContainer>
+			{children}
 			<NavWrapper>
 				<Logo>
 					<SCLink to='/'>
