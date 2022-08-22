@@ -4,6 +4,7 @@ export const VideoContainer = styled.div`
 	display: flex;
 	gap: 24px;
 	margin-top: 20px;
+	padding-left: 10px;
 `;
 
 export const Content = styled.div`
