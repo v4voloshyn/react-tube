@@ -12,7 +12,6 @@ import {
 	Channel,
 	ChannelInfo,
 	SubscribeBtn,
-	ChannelImg,
 	ChannelDetail,
 	ChannelName,
 	ChannelCounter,
@@ -20,7 +19,7 @@ import {
 } from './Video.styled';
 
 import { ThumbUp, ThumbDown, Share } from '@mui/icons-material';
-import { Hr } from '../../components/UI';
+import { Hr, ChannelImg } from '../../components/UI';
 import { Comments } from '../../components/comment';
 import ChanelLogo from '../../assets/boriska.jpg';
 import { Card } from '../../components/card';

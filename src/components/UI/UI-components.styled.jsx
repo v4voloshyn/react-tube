@@ -33,3 +33,12 @@ export const Hr = styled.hr`
 	border-color: ${({ theme }) => theme.hrColor};
 	border-radius: 15px;
 `;
+
+export const ChannelImg = styled.img`
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	background-color: #999;
+	object-fit: fill;
+	flex: 0 0 auto;
+`;

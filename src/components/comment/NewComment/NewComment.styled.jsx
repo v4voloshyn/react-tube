@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const NCContainer = styled.div``;
+
 export const NCWrapper = styled.div`
 	display: flex;
 	flex-wrap: nowrap;
@@ -8,6 +9,7 @@ export const NCWrapper = styled.div`
 	gap: 20px;
 	margin: 20px 0px;
 `;
+
 export const NCInput = styled.input`
 	width: 100%;
 	border: none;
