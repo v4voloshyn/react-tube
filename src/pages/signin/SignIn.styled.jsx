@@ -30,7 +30,7 @@ export const SignInSubtitle = styled.span`
 
 export const SignInInput = styled.input`
 	padding: 10px 20px;
-	width: 90%;
+	width: 100%;
 	background-color: transparent;
 	border: 1px solid ${({ theme }) => theme.hrColor};
 	border-radius: 3px;
