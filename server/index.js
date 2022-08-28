@@ -21,9 +21,22 @@ const connectDB = async () => {
 	}
 };
 
+app.use(express.json());
+
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/comments', commentRouter);
 app.use('/api/v1/videos', videoRouter);
+
+app.use((error, req, res, next) => {
+	const status = error.status || 500;
+	const message = error.message || 'Something went wrong';
+	return res.status(status).json({
+		success: false,
+		status,
+		message,
+		error,
+	});
+});
 
 app.listen(PORT, connectDB(), () => console.log(`Server is running on ${PORT} PORT`));
