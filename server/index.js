@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import { userRouter } from './routes/userRouter.js';
 import { commentRouter } from './routes/commentRouter.js';
 import { videoRouter } from './routes/videoRouter.js';
@@ -22,12 +23,14 @@ const connectDB = async () => {
 };
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/comments', commentRouter);
 app.use('/api/v1/videos', videoRouter);
 
+// TODO: Make this as middleware
 app.use((error, req, res, next) => {
 	const status = error.status || 500;
 	const message = error.message || 'Something went wrong';
