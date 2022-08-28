@@ -1,8 +1,13 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import { userRouter } from './routes/userRouter.js';
+import { commentRouter } from './routes/commentRouter.js';
+import { videoRouter } from './routes/videoRouter.js';
+import { authRouter } from './routes/authRouter.js';
 
 dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 5432;
 
@@ -15,5 +20,10 @@ const connectDB = async () => {
 		process.exit(1);
 	}
 };
+
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/comments', commentRouter);
+app.use('/api/v1/videos', videoRouter);
 
 app.listen(PORT, connectDB(), () => console.log(`Server is running on ${PORT} PORT`));
