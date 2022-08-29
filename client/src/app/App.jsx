@@ -5,7 +5,7 @@ import { darkTheme, lightTheme } from '../utils/theme';
 import { AppContainer, AppMain, AppWrapper } from './App.styled';
 import { Route, Routes } from 'react-router-dom';
 import { Home, SignIn, Video } from '../pages';
-import { useOnClickOutside } from '../hooks/useOnClickOutside ';
+import { useOnClickOutside } from '../hooks/useOnClickOutside';
 
 export const App = () => {
 	const [isDarkMode, setDarkMode] = useState(true);
