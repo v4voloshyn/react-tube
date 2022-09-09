@@ -1,5 +1,6 @@
 import { createError } from '../helpers/error.js';
 import UserModel from '../models/User.js';
+import VideoModel from '../models/Video.js';
 
 export const updateUser = async (req, res, next) => {
 	if (req.params.id === req.user.id) {
@@ -47,6 +48,8 @@ export const getUser = async (req, res, next) => {
 	}
 };
 
+// TODO: fix subscribe to myself
+// TODO: fix subscribe more then one. Hint: use like/dislike principle below
 export const subscribeUser = async (req, res, next) => {
 	try {
 		await UserModel.findByIdAndUpdate(req.user.id, {
@@ -79,6 +82,52 @@ export const unsubscribeUser = async (req, res, next) => {
 	}
 };
 
-export const like = async (req, res, next) => {};
+export const like = async (req, res, next) => {
+	const userId = req.user.id;
+	const videoId = req.params.videoId;
 
-export const dislike = async (req, res, next) => {};
+	try {
+		const currentVideo = await VideoModel.findById(videoId);
+
+		if (currentVideo.likes.includes(userId)) {
+			await VideoModel.findByIdAndUpdate(videoId, {
+				$pull: { likes: userId },
+			});
+			res.status(200).send('You REMOVE like from this video!');
+		} else {
+			await VideoModel.findByIdAndUpdate(videoId, {
+				$addToSet: { likes: userId },
+				$pull: { dislikes: userId },
+			});
+			res.status(200).send('You liked this video!');
+		}
+	} catch (error) {
+		return next(createError(500, 'Something went wrong'));
+	}
+};
+
+export const dislike = async (req, res, next) => {
+	const userId = req.user.id;
+	const videoId = req.params.videoId;
+
+	try {
+		const currentVideo = await VideoModel.findById(videoId);
+
+		if (currentVideo.dislikes.includes(userId)) {
+			await VideoModel.findByIdAndUpdate(videoId, {
+				$pull: { dislikes: userId },
+			});
+
+			res.status(200).send('You REMOVE dislike from this video!');
+		} else {
+			await VideoModel.findByIdAndUpdate(videoId, {
+				$addToSet: { dislikes: userId },
+				$pull: { likes: userId },
+			});
+
+			res.status(200).send('You disliked this video!');
+		}
+	} catch (error) {
+		return next(createError(500, 'Something went wrong'));
+	}
+};
