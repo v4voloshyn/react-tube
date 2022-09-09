@@ -38,7 +38,6 @@ app.use((error, req, res, next) => {
 		success: false,
 		status,
 		message,
-		error,
 	});
 });
 
