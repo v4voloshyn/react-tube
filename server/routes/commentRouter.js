@@ -1,4 +1,11 @@
 import express from 'express';
-import {} from '../controllers/commentController.js';
+import { addComment, deleteComment, getComments } from '../controllers/commentController.js';
+import { verifyUserToken } from '../middlewares/authMiddleware.js';
 
 export const commentRouter = express.Router();
+
+commentRouter.get('/:videoId', getComments);
+
+commentRouter.post('/', verifyUserToken, addComment);
+
+commentRouter.delete('/:id', verifyUserToken, deleteComment);
