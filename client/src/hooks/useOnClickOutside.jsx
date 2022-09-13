@@ -1,14 +1,9 @@
 import { useEffect } from 'react';
 
-export const useOnClickOutside = (menuNode, burgerNode, handler) => {
+export const useOnClickOutside = (burgerNode, handler) => {
 	useEffect(() => {
 		const listener = (event) => {
-			if (
-				!menuNode.current ||
-				menuNode.current.contains(event.target) ||
-				!burgerNode.current ||
-				burgerNode.current.contains(event.target)
-			) {
+			if (!burgerNode.current || burgerNode.current.contains(event.target)) {
 				return;
 			}
 			handler(event);
@@ -18,5 +13,5 @@ export const useOnClickOutside = (menuNode, burgerNode, handler) => {
 		return () => {
 			document.removeEventListener('mousedown', listener);
 		};
-	}, [menuNode, burgerNode, handler]);
+	}, [burgerNode, handler]);
 };

@@ -30,24 +30,31 @@ export const Sidebar = ({ changeTheme, isDarkMode, open, menuRef }) => {
 						<Img src={LogoImg} /> UATube
 					</SCLink>
 				</Logo>
-				<Item>
-					<HomeIcon />
-					Home
-				</Item>
-				<Item>
-					<Explore />
-					Explore
-				</Item>
-				<Item>
-					<Subscriptions />
-					Subscriptions
-				</Item>
-
+				<SCLink to='/'>
+					<Item>
+						<HomeIcon />
+						Home
+					</Item>
+				</SCLink>
+				<SCLink to='hot'>
+					<Item>
+						<Explore />
+						Explore
+					</Item>
+				</SCLink>
+				<SCLink to='subscriptions'>
+					<Item>
+						<Subscriptions />
+						Subscriptions
+					</Item>
+				</SCLink>
 				<Hr />
-				<Item>
-					<VideoLibrary />
-					Video
-				</Item>
+				<SCLink to='hot'>
+					<Item>
+						<VideoLibrary />
+						Video
+					</Item>
+				</SCLink>
 				<Item>
 					<History />
 					History
