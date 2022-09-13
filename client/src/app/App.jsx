@@ -12,9 +12,8 @@ export const App = () => {
 	const [open, setOpen] = useState(false);
 
 	const burgerRef = useRef(null);
-	const menuRef = useRef(null);
 
-	useOnClickOutside(menuRef, burgerRef, () => setOpen(false));
+	useOnClickOutside(burgerRef, () => setOpen(false));
 
 	const changeThemeMode = useCallback(() => {
 		setDarkMode((mode) => !mode);
@@ -26,7 +25,7 @@ export const App = () => {
 		<ThemeProvider theme={currentTheme}>
 			<Sidebar
 				changeTheme={changeThemeMode}
-				menuRef={menuRef}
+				//menuRef={menuRef}
 				isDarkMode={isDarkMode}
 				open={open}
 			/>
@@ -38,7 +37,9 @@ export const App = () => {
 					<AppWrapper>
 						<Routes>
 							<Route path='/'>
-								<Route index element={<Home />} />
+								<Route index element={<Home type={'random'} />} />
+								<Route path='hot' element={<Home type={'hot'} />} />
+								<Route path='subscriptions' element={<Home type={'subscriptions'} />} />
 								<Route path='signin' element={<SignIn />} />
 								<Route path='video'>
 									<Route path=':id' element={<Video />} />
