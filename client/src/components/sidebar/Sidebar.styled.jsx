@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { LinkBtn } from '../UI';
+import { LinkBtn, SCLink } from '../UI';
 
 export const Item = styled.div`
+	width: 100%;
 	display: flex;
 	align-items: center;
 	gap: 15px;
@@ -30,15 +31,16 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div`
 	padding: 12px 20px 20px 20px;
-	& > ${Item}:nth-child(2) {
+	& ${SCLink}:nth-child(2) {
 		margin-top: 20px;
 	}
 
-	${Item} {
-		&:hover,
-		&:focus {
-			background-color: rgba(0, 0, 0, 0.1);
-		}
+	& > ${SCLink}:hover, & > ${SCLink}:focus {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
+	& > ${SCLink}:focus {
+		outline: 1px solid rgba(0, 0, 0, 0.5);
+		border-radius: 5px;
 	}
 `;
 
