@@ -1,10 +1,13 @@
-import { Person, SearchOutlined } from '@mui/icons-material';
+import { Person, SearchOutlined, VideoCallOutlined } from '@mui/icons-material';
 import React from 'react';
 import { LinkBtn, Logo, SCLink } from '../UI';
-import { NavContainer, NavInput, NavSearch, NavWrapper } from './Navbar.styled';
+import { Avatar, NavContainer, NavInput, NavSearch, NavWrapper, User } from './Navbar.styled';
 import LogoImg from '../../assets/logo.webp';
+import { useSelector } from 'react-redux';
 
 export const Navbar = ({ children }) => {
+	const userData = useSelector((state) => state.user.data);
+
 	return (
 		<NavContainer>
 			{children}
@@ -18,10 +21,18 @@ export const Navbar = ({ children }) => {
 					<NavInput placeholder='Search' />
 					<SearchOutlined />
 				</NavSearch>
-				<LinkBtn to='signin'>
-					<Person />
-					SIGN IN
-				</LinkBtn>
+				{userData ? (
+					<User>
+						<VideoCallOutlined style={{ cursor: 'pointer' }} />
+						{userData.img ? <Avatar src={userData.img} /> : <Avatar />}
+						{userData.name}
+					</User>
+				) : (
+					<LinkBtn to='signin'>
+						<Person />
+						SIGN IN
+					</LinkBtn>
+				)}
 			</NavWrapper>
 		</NavContainer>
 	);
