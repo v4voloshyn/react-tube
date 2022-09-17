@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import storage from 'redux-persist/lib/storage';
 
 const defaultState = {
 	data: null,
@@ -26,7 +27,8 @@ const userSlice = createSlice({
 			state.errorMessage = action.payload;
 		},
 		logout: (state) => {
-			state = defaultState;
+			state.data = null;
+			storage.removeItem('persist:root');
 		},
 	},
 });

@@ -3,6 +3,8 @@ import bcrypt from 'bcryptjs';
 import { createError } from '../helpers/error.js';
 import jwt from 'jsonwebtoken';
 
+// TODO: write documentation to every single function
+
 export const signUp = async (req, res, next) => {
 	try {
 		const data = req.body;
@@ -39,7 +41,8 @@ export const signIn = async (req, res, next) => {
 
 		const { password, ...data } = user._doc;
 
-		res.cookie('access_token', token, { httpOnly: true }).status(200).json(data);
+		res.cookie('access_token', token, { httpOnly: true });
+		res.status(200).json(data);
 	} catch (error) {
 		next(error);
 	}
@@ -52,7 +55,8 @@ export const googleAuth = async (req, res, next) => {
 		if (user) {
 			const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
-			res.cookie('access_token', token, { httpOnly: true }).status(200).json(user._doc);
+			res.cookie('access_token', token, { httpOnly: true });
+			res.status(200).json(user._doc);
 		} else {
 			const newUser = new User({
 				...req.body,
@@ -61,8 +65,25 @@ export const googleAuth = async (req, res, next) => {
 			const savedUser = await newUser.save();
 			const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET);
 
-			res.cookie('access_token', token, { httpOnly: true }).status(201).json(savedUser._doc);
+			res.cookie('access_token', token, { httpOnly: true });
+			res.status(201).json(savedUser._doc);
 		}
+	} catch (error) {
+		next(error);
+	}
+};
+
+// @desc    Logout controller to clear cookie and token
+// @route   GET /api/v1/auth/logout
+// @access  Private
+export const cleanCookiesAndLogout = async (req, res, next) => {
+	try {
+		// Set token to none and expire after 5 seconds
+		res.cookie('access_token', 'none', {
+			expires: new Date(Date.now()),
+			httpOnly: true,
+		});
+		res.status(200).json({ success: true, message: 'User logged out successfully' });
 	} catch (error) {
 		next(error);
 	}

@@ -1,12 +1,22 @@
-import { Person, SearchOutlined, VideoCallOutlined } from '@mui/icons-material';
+import { ExitToAppOutlined, Person, SearchOutlined, VideoCallOutlined } from '@mui/icons-material';
 import React from 'react';
-import { LinkBtn, Logo, SCLink } from '../UI';
+import { LinkBtn, Logo, SCButton, SCLink } from '../UI';
 import { Avatar, NavContainer, NavInput, NavSearch, NavWrapper, User } from './Navbar.styled';
 import LogoImg from '../../assets/logo.webp';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../redux/userSlice';
+import axios from 'axios';
 
 export const Navbar = ({ children }) => {
 	const userData = useSelector((state) => state.user.data);
+	const dispatch = useDispatch();
+
+	const logOut = async () => {
+		axios.get(`/auth/logout`).then((resp) => {
+			console.log('resp :>> ', resp);
+			dispatch(logout());
+		});
+	};
 
 	return (
 		<NavContainer>
@@ -24,8 +34,12 @@ export const Navbar = ({ children }) => {
 				{userData ? (
 					<User>
 						<VideoCallOutlined style={{ cursor: 'pointer' }} />
-						{userData.img ? <Avatar src={userData.img} /> : <Avatar />}
+						<Avatar src={userData.img} />
 						{userData.name}
+						<SCButton onClick={logOut}>
+							<ExitToAppOutlined />
+							Logout
+						</SCButton>
 					</User>
 				) : (
 					<LinkBtn to='signin'>
