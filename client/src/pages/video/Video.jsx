@@ -45,11 +45,11 @@ export const Video = () => {
 	const [channelData, setChannelData] = useState({});
 
 	const currentUserID = useSelector((state) => state.user.data?._id);
-	const videoData = useSelector((state) => state.video.data);
-
-	const dispatch = useDispatch();
+	const currentVideo = useSelector((state) => state.video.data);
 
 	const videoID = useLocation().pathname.split('/')[2];
+
+	const dispatch = useDispatch();
 
 	const handleLike = async () => {
 		const res = await axios.put(`/users/like/${videoID}`);
@@ -66,6 +66,7 @@ export const Video = () => {
 
 	useEffect(() => {
 		dispatch(fetchVideoStart());
+
 		const fetchVideo = async () => {
 			try {
 				const videoResponse = await axios.get(`/videos/find/${videoID}`);
@@ -96,18 +97,18 @@ export const Video = () => {
 						allowFullScreen
 					></iframe>
 				</VideoBody>
-				<VideoTitle>{videoData.title}</VideoTitle>
+				<VideoTitle>{currentVideo.title}</VideoTitle>
 				<VideoDetails>
 					<VideoInfo>
-						{videoData.views} views * {format(videoData.createdAt)}
+						{currentVideo.views} views * {format(currentVideo.createdAt)}
 					</VideoInfo>
 					<VideoButtons>
 						<Button onClick={handleLike}>
-							{videoData.likes?.includes(currentUserID) ? <ThumbUp /> : <ThumbUpAltOutlined />}
-							{videoData.likes?.length}
+							{currentVideo.likes?.includes(currentUserID) ? <ThumbUp /> : <ThumbUpAltOutlined />}
+							{currentVideo.likes?.length}
 						</Button>
 						<Button onClick={handleDislike}>
-							{videoData.dislikes?.includes(currentUserID) ? (
+							{currentVideo.dislikes?.includes(currentUserID) ? (
 								<ThumbDown />
 							) : (
 								<ThumbDownAltOutlined />
@@ -122,11 +123,11 @@ export const Video = () => {
 				<Hr />
 				<Channel>
 					<ChannelInfo>
-						<ChannelImg src={ChanelLogo} />
+						<ChannelImg src={channelData.img} />
 						<ChannelDetail>
 							<ChannelName>{channelData.name}</ChannelName>
 							<ChannelCounter>{channelData.subscribers} subscribers</ChannelCounter>
-							<ChannelDescr>{videoData.description}</ChannelDescr>
+							<ChannelDescr>{currentVideo.description}</ChannelDescr>
 						</ChannelDetail>
 					</ChannelInfo>
 					<SubscribeBtn>Subscribe</SubscribeBtn>
