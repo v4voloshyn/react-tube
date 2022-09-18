@@ -19,7 +19,7 @@ import axios from 'axios';
 
 export const Card = ({ type, video = [] }) => {
 	const [channel, setChannel] = useState([]);
-	console.log('video :>> ', channel);
+
 	useEffect(() => {
 		const getChannelInfo = async () => {
 			const response = await axios.get(`/users/find/${video.userId}`);
@@ -29,9 +29,8 @@ export const Card = ({ type, video = [] }) => {
 		getChannelInfo();
 	}, [video.userId]);
 
-	console.log('channelInfo :>> ', channel);
 	return (
-		<SCLink to='/video/test123'>
+		<SCLink to={`/video/${video._id}`}>
 			<CardContainer type={type}>
 				<CardImage src={video.imgUrl || CardPoster} type={type} />
 				<CardDetailsWrapper type={type}>
