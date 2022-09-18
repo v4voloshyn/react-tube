@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	Content,
 	Recomendations,
@@ -18,13 +18,70 @@ import {
 	ChannelDescr,
 } from './Video.styled';
 
-import { ThumbUp, ThumbDown, Share } from '@mui/icons-material';
+import {
+	ThumbUp,
+	ThumbDown,
+	Share,
+	ThumbUpAltOutlined,
+	ThumbDownAltOutlined,
+} from '@mui/icons-material';
 import { Hr, ChannelImg } from '../../components/UI';
 import { Comments } from '../../components/comment';
 import ChanelLogo from '../../assets/boriska.jpg';
 import { Card } from '../../components/card';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+import {
+	dislikeVideo,
+	fetchVideoFailure,
+	fetchVideoStart,
+	fetchVideoSuccess,
+	likeVideo,
+} from '../../redux/videoSlice';
+import { format } from 'timeago.js';
 
 export const Video = () => {
+	const [channelData, setChannelData] = useState({});
+
+	const currentUserID = useSelector((state) => state.user.data?._id);
+	const videoData = useSelector((state) => state.video.data);
+
+	const dispatch = useDispatch();
+
+	const videoID = useLocation().pathname.split('/')[2];
+
+	const handleLike = async () => {
+		const res = await axios.put(`/users/like/${videoID}`);
+		if (res.statusText === 'OK') {
+			dispatch(likeVideo(currentUserID));
+		}
+	};
+	const handleDislike = async () => {
+		const res = await axios.put(`/users/dislike/${videoID}`);
+		if (res.statusText === 'OK') {
+			dispatch(dislikeVideo(currentUserID));
+		}
+	};
+
+	useEffect(() => {
+		dispatch(fetchVideoStart());
+		const fetchVideo = async () => {
+			try {
+				const videoResponse = await axios.get(`/videos/find/${videoID}`);
+				const channelResponse = await axios.get(`/users/find/${videoResponse.data.userId}`);
+
+				setChannelData(channelResponse.data);
+
+				dispatch(fetchVideoSuccess(videoResponse.data));
+			} catch (error) {
+				dispatch(fetchVideoFailure(error));
+			}
+		};
+
+		fetchVideo();
+	}, [videoID, dispatch]);
+
 	return (
 		<VideoContainer>
 			<Content>
@@ -39,17 +96,23 @@ export const Video = () => {
 						allowFullScreen
 					></iframe>
 				</VideoBody>
-				<VideoTitle>
-					Typescript + Node.js tutorial. You definitely should learn this topic
-				</VideoTitle>
+				<VideoTitle>{videoData.title}</VideoTitle>
 				<VideoDetails>
-					<VideoInfo>3,425,777 views * Aug 22, 2022</VideoInfo>
+					<VideoInfo>
+						{videoData.views} views * {format(videoData.createdAt)}
+					</VideoInfo>
 					<VideoButtons>
-						<Button>
-							<ThumbUp /> 777k
+						<Button onClick={handleLike}>
+							{videoData.likes?.includes(currentUserID) ? <ThumbUp /> : <ThumbUpAltOutlined />}
+							{videoData.likes?.length}
 						</Button>
-						<Button>
-							<ThumbDown /> Dislike
+						<Button onClick={handleDislike}>
+							{videoData.dislikes?.includes(currentUserID) ? (
+								<ThumbDown />
+							) : (
+								<ThumbDownAltOutlined />
+							)}
+							Dislike
 						</Button>
 						<Button>
 							<Share /> Share
@@ -61,12 +124,9 @@ export const Video = () => {
 					<ChannelInfo>
 						<ChannelImg src={ChanelLogo} />
 						<ChannelDetail>
-							<ChannelName>Barbariska Johnsonuk</ChannelName>
-							<ChannelCounter>40.3M subscribers</ChannelCounter>
-							<ChannelDescr>
-								Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque magnam ratione
-								dolor aliquid quisquam officiis exercitationem natus labore veniam dolores?
-							</ChannelDescr>
+							<ChannelName>{channelData.name}</ChannelName>
+							<ChannelCounter>{channelData.subscribers} subscribers</ChannelCounter>
+							<ChannelDescr>{videoData.description}</ChannelDescr>
 						</ChannelDetail>
 					</ChannelInfo>
 					<SubscribeBtn>Subscribe</SubscribeBtn>
@@ -75,14 +135,14 @@ export const Video = () => {
 				<Comments></Comments>
 			</Content>
 			<Recomendations>
+				{/*<Card type='sm' />
 				<Card type='sm' />
 				<Card type='sm' />
 				<Card type='sm' />
 				<Card type='sm' />
 				<Card type='sm' />
 				<Card type='sm' />
-				<Card type='sm' />
-				<Card type='sm' />
+				<Card type='sm' />*/}
 			</Recomendations>
 		</VideoContainer>
 	);
