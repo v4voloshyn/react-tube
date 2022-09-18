@@ -29,21 +29,27 @@ const videoSlice = createSlice({
 		likeVideo: (state, action) => {
 			const userID = action.payload;
 
+			if (state.data.dislikes.includes(userID)) {
+				state.data.dislikes.splice(state.data.dislikes.indexOf(userID), 1);
+			}
+
 			if (state.data.likes.includes(userID)) {
 				state.data.likes.splice(state.data.likes.indexOf(userID), 1);
 			} else {
 				state.data.likes.push(userID);
-				state.data.dislikes.splice(state.data.dislikes.indexOf(userID), 1);
 			}
 		},
 		dislikeVideo: (state, action) => {
 			const userID = action.payload;
 
+			if (state.data.likes.includes(userID)) {
+				state.data.likes.splice(state.data.likes.indexOf(userID), 1);
+			}
+
 			if (state.data.dislikes.includes(userID)) {
 				state.data.dislikes.splice(state.data.dislikes.indexOf(userID), 1);
 			} else {
 				state.data.dislikes.push(userID);
-				state.data.likes.splice(state.data.likes.indexOf(userID), 1);
 			}
 		},
 	},
