@@ -34,7 +34,7 @@ export const Card = ({ type, video = [] }) => {
 			<CardContainer type={type}>
 				<CardImage src={video.imgUrl || CardPoster} type={type} />
 				<CardDetailsWrapper type={type}>
-					<ChannelAvatar src={channel.img || ChannelAvatarImg} type={type} />
+					<ChannelAvatar src={channel.img} type={type} />
 					<CardDetails type={type}>
 						<CardTitle type={type}>{video.title}</CardTitle>
 						<ChannelName>{channel.name}</ChannelName>

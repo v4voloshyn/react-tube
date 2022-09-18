@@ -25,9 +25,11 @@ export const Home = ({ type }) => {
 
 	return (
 		<HomeContainer>
-			{videos.map((video) => (
-				<Card key={video._id} video={video} />
-			))}
+			{videos.length ? (
+				videos.map((video) => <Card key={video._id} video={video} />)
+			) : (
+				<h1 style={{ margin: 'auto' }}>NO VIDEOS</h1>
+			)}
 		</HomeContainer>
 	);
 };
