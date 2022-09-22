@@ -27,7 +27,6 @@ import {
 } from '@mui/icons-material';
 import { Hr, ChannelImg } from '../../components/UI';
 import { Comments } from '../../components/comment';
-import ChanelLogo from '../../assets/boriska.jpg';
 import { Card } from '../../components/card';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -40,16 +39,17 @@ import {
 	likeVideo,
 } from '../../redux/videoSlice';
 import { format } from 'timeago.js';
+import { subscribeOnChannel } from '../../redux/userSlice';
 
 export const Video = () => {
 	const [channelData, setChannelData] = useState({});
+	const dispatch = useDispatch();
 
-	const currentUserID = useSelector((state) => state.user.data?._id);
+	const currentUser = useSelector((state) => state.user.data);
 	const currentVideo = useSelector((state) => state.video.data);
+	const currentUserID = currentUser?._id;
 
 	const videoID = useLocation().pathname.split('/')[2];
-
-	const dispatch = useDispatch();
 
 	const handleLike = async () => {
 		const res = await axios.put(`/users/like/${videoID}`);
@@ -61,6 +61,18 @@ export const Video = () => {
 		const res = await axios.put(`/users/dislike/${videoID}`);
 		if (res.statusText === 'OK') {
 			dispatch(dislikeVideo(currentUserID));
+		}
+	};
+
+	const handleSubscribe = async () => {
+		let response;
+		if (currentUser.subscribedUsers.includes(channelData._id)) {
+			response = await axios.put(`/users/unsub/${channelData._id}`);
+		} else {
+			response = await axios.put(`/users/sub/${channelData._id}`);
+		}
+		if (response.statusText === 'OK') {
+			dispatch(subscribeOnChannel(channelData._id));
 		}
 	};
 
@@ -130,10 +142,15 @@ export const Video = () => {
 							<ChannelDescr>{currentVideo.description}</ChannelDescr>
 						</ChannelDetail>
 					</ChannelInfo>
-					<SubscribeBtn>Subscribe</SubscribeBtn>
+					<SubscribeBtn
+						onClick={handleSubscribe}
+						isSub={currentUser?.subscribedUsers?.includes(channelData._id)}
+					>
+						{currentUser?.subscribedUsers?.includes(channelData._id) ? 'Sibscribed' : 'Subscribe'}
+					</SubscribeBtn>
 				</Channel>
 				<Hr />
-				<Comments></Comments>
+				<Comments />
 			</Content>
 			<Recomendations>
 				{/*<Card type='sm' />

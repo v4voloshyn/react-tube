@@ -30,9 +30,19 @@ const userSlice = createSlice({
 			state.data = null;
 			storage.removeItem('persist:root');
 		},
+		subscribeOnChannel: (state, action) => {
+			const channelID = action.payload;
+
+			if (state.data.subscribedUsers.includes(channelID)) {
+				state.data.subscribedUsers.splice(state.data.subscribedUsers.indexOf(channelID), 1);
+			} else {
+				state.data.subscribedUsers.push(channelID);
+			}
+		},
 	},
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout } = userSlice.actions;
+export const { loginStart, loginSuccess, loginFailure, logout, subscribeOnChannel } =
+	userSlice.actions;
 
 export default userSlice.reducer;
