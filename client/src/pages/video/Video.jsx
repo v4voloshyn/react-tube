@@ -146,11 +146,11 @@ export const Video = () => {
 						onClick={handleSubscribe}
 						isSub={currentUser?.subscribedUsers?.includes(channelData._id)}
 					>
-						{currentUser?.subscribedUsers?.includes(channelData._id) ? 'Sibscribed' : 'Subscribe'}
+						{currentUser?.subscribedUsers?.includes(channelData._id) ? 'Subscribed' : 'Subscribe'}
 					</SubscribeBtn>
 				</Channel>
 				<Hr />
-				<Comments />
+				<Comments videoID={videoID} />
 			</Content>
 			<Recomendations>
 				{/*<Card type='sm' />
