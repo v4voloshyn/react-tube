@@ -23,10 +23,14 @@ export const Comment = (comment) => {
 		fetchCommentAuthor();
 	}, [comment.userId]);
 
+	const setFullURL = (url = '') => {
+		return url.includes('https://') || url.includes('http://') ? url : `https://${url}`;
+	};
+
 	return (
 		<CommentContainer>
 			<CommentInfo>
-				<AuthorImg src={commentUser.img} />
+				<AuthorImg src={setFullURL(commentUser.img)} />
 				<CommentDetails>
 					<AuthorName>
 						{commentUser.name}
