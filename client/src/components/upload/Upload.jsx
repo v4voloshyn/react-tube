@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import {
 	Button,
@@ -11,9 +12,8 @@ import {
 	Title,
 	Wrapper,
 } from './Upload.styled';
-import app from '../../firebase';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+
+import { uploadFile } from './helpers/uploadFile';
 
 export const Upload = ({ setIsShown }) => {
 	const [textInputs, setTextInputs] = useState({});
@@ -36,68 +36,23 @@ export const Upload = ({ setIsShown }) => {
 		setTags(e.target.value.split(',').map((el) => el.trim()));
 	};
 
-	const uploadFile = (file, fileUrlType) => {
-		const storage = getStorage(app);
-		const filename = new Date().getTime() + file?.name;
-		const storageRef = ref(storage, filename);
-
-		const uploadTask = uploadBytesResumable(storageRef, file);
-
-		// Listen for state changes, errors, and completion of the upload.
-		uploadTask.on(
-			'state_changed',
-			(snapshot) => {
-				// Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-				const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-				fileUrlType === 'imgUrl'
-					? setImagePerc(progress.toFixed(1))
-					: setVideoPerc(progress.toFixed(1));
-
-				switch (snapshot.state) {
-					case 'paused':
-						console.log('Upload is paused');
-						break;
-					case 'running':
-						console.log('Upload is running');
-						break;
-					default:
-						break;
-				}
-			},
-			(error) => {
-				console.log(error);
-			},
-			() => {
-				// Upload completed successfully, now we can get the download URL
-				getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-					setTextInputs((prev) => ({
-						...prev,
-						[fileUrlType]: downloadURL,
-					}));
-				});
-			}
-		);
-	};
-
 	const handleUpload = async (e) => {
 		e.preventDefault();
-		if (!textInputs || !tags || !image || !video) return;
 
-		const res = await axios.post('/videos', { ...textInputs, tags, image, video });
+		if (!textInputs.title || !tags.length || !image || !video) return;
+
+		const [videoUrl, imgUrl] = await Promise.all([
+			uploadFile(video, setVideoPerc),
+			uploadFile(image, setImagePerc),
+		]);
+
+		const res = await axios.post('/videos', { ...textInputs, videoUrl, imgUrl, tags });
 
 		if (res.status === 201) {
 			setIsShown(false);
 			navigate(`/video/${res.data._id}`);
 		}
 	};
-
-	useEffect(() => {
-		video && uploadFile(video, 'videoUrl');
-	}, [video]);
-
-	useEffect(() => {
-		image && uploadFile(image, 'imgUrl');
-	}, [image]);
 
 	return (
 		<Container>
@@ -110,17 +65,16 @@ export const Upload = ({ setIsShown }) => {
 				{videoPerc > 0 ? (
 					<span>Uploading: {videoPerc}%</span>
 				) : (
-					<Input type='file' accept='video/*' onChange={(e) => setVideo(e.target.files[0])} />
+					<Input
+						type='file'
+						name='video'
+						accept='video/*'
+						onChange={(e) => setVideo(e.target.files[0])}
+					/>
 				)}
 
 				<Label>Title:</Label>
-				<Input
-					type='text'
-					name='title'
-					placeholder='Title'
-					value={textInputs['title']}
-					onChange={handleInputChange}
-				/>
+				<Input type='text' name='title' placeholder='Title' onChange={handleInputChange} />
 				<InputArea
 					rows='8'
 					type='text'
@@ -130,15 +84,20 @@ export const Upload = ({ setIsShown }) => {
 				/>
 				<Input
 					type='text'
+					name='tags'
 					placeholder='Add tags, separated with commas'
-					//value={textInputs['tags']}
 					onChange={handleTags}
 				/>
 				<Label>Video thumbnail:</Label>
-				{imagePerc > 0 ? (
-					<span>Uploading: {imagePerc}%</span>
-				) : (
-					<Input type='file' accept='image/*' onChange={(e) => setImage(e.target.files[0])} />
+				{imagePerc > 0 && imagePerc < 100 && <span>Uploading: {imagePerc}%</span>}
+				{imagePerc > 0 && imagePerc === 100 && <span>Uploaded {image.name}</span>}
+				{imagePerc === 0 && (
+					<Input
+						type='file'
+						name='image'
+						accept='image/*'
+						onChange={(e) => setImage(e.target.files[0])}
+					/>
 				)}
 
 				<Button onClick={handleUpload}>Upload video</Button>
