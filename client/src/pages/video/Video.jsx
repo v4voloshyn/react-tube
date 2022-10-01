@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ReactPlayer from 'react-player';
 import {
 	Content,
 	Recomendations,
@@ -99,15 +100,20 @@ export const Video = () => {
 		<VideoContainer>
 			<Content>
 				<VideoBody>
-					<iframe
+					<ReactPlayer
 						width='100%'
 						height='100%'
-						src='https://www.youtube.com/embed/JUXRMuDoVm4'
-						title='YouTube video player'
-						frameBorder='0'
-						allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-						allowFullScreen
-					></iframe>
+						url={currentVideo.videoUrl}
+						title={currentVideo.title}
+						config={{
+							youtube: {
+								playerVars: { showinfo: 1 },
+							},
+						}}
+						controls
+						light={currentVideo.imgUrl}
+						volume='0.3'
+					/>
 				</VideoBody>
 				<VideoTitle>{currentVideo.title}</VideoTitle>
 				<VideoDetails>
