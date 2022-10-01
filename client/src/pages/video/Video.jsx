@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import {
 	Content,
-	Recomendations,
 	VideoContainer,
 	VideoDetails,
 	VideoTitle,
@@ -28,7 +27,6 @@ import {
 } from '@mui/icons-material';
 import { Hr, ChannelImg } from '../../components/UI';
 import { Comments } from '../../components/comment';
-import { Card } from '../../components/card';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -41,6 +39,7 @@ import {
 } from '../../redux/videoSlice';
 import { format } from 'timeago.js';
 import { subscribeOnChannel } from '../../redux/userSlice';
+import { Recommendation } from '../../components/recommendation/Recommendation';
 
 export const Video = () => {
 	const [channelData, setChannelData] = useState({});
@@ -112,7 +111,7 @@ export const Video = () => {
 						}}
 						controls
 						light={currentVideo.imgUrl}
-						volume='0.3'
+						volume={0.3}
 					/>
 				</VideoBody>
 				<VideoTitle>{currentVideo.title}</VideoTitle>
@@ -158,16 +157,7 @@ export const Video = () => {
 				<Hr />
 				<Comments videoID={videoID} />
 			</Content>
-			<Recomendations>
-				{/*<Card type='sm' />
-				<Card type='sm' />
-				<Card type='sm' />
-				<Card type='sm' />
-				<Card type='sm' />
-				<Card type='sm' />
-				<Card type='sm' />
-				<Card type='sm' />*/}
-			</Recomendations>
+			<Recommendation tags={currentVideo.tags} />
 		</VideoContainer>
 	);
 };
