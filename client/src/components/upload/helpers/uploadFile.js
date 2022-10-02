@@ -30,6 +30,6 @@ export const uploadFile = (file, setPercentage) =>
 				console.log(error);
 				reject(error);
 			},
-			() => resolve(getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => downloadURL))
+			() => resolve(getDownloadURL(uploadTask.snapshot.ref))
 		);
 	});

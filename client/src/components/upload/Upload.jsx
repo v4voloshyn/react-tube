@@ -89,8 +89,12 @@ export const Upload = ({ setIsShown }) => {
 					onChange={handleTags}
 				/>
 				<Label>Video thumbnail:</Label>
-				{imagePerc > 0 && imagePerc < 100 && <span>Uploading: {imagePerc}%</span>}
-				{imagePerc > 0 && imagePerc === 100 && <span>Uploaded {image.name}</span>}
+				{imagePerc > 0 && imagePerc < 100 && (
+					<div>
+						Uploading {image.name}: {imagePerc}%
+					</div>
+				)}
+				{imagePerc >= 100 && <div>Uploaded {image.name}</div>}
 				{imagePerc === 0 && (
 					<Input
 						type='file'
