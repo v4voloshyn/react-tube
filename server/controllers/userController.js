@@ -44,7 +44,7 @@ export const getUser = async (req, res, next) => {
 		}
 		return res.status(200).json(user);
 	} catch (error) {
-		return next(createError(500, 'Something went wrong'));
+		return next(createError(500, 'Something went wrong trying to get user'));
 	}
 };
 
@@ -62,7 +62,7 @@ export const subscribeUser = async (req, res, next) => {
 
 		res.status(200).json('Successfull subscribe');
 	} catch (error) {
-		return next(createError(500, 'Something went wrong'));
+		return next(createError(500, 'Something went wrong on subscribe'));
 	}
 };
 
@@ -78,7 +78,7 @@ export const unsubscribeUser = async (req, res, next) => {
 
 		res.status(200).json('Successfull UNsubscribe');
 	} catch (error) {
-		return next(createError(500, 'Something went wrong'));
+		return next(createError(500, 'Something went wrong on unsubscribe'));
 	}
 };
 
@@ -102,7 +102,7 @@ export const like = async (req, res, next) => {
 			res.status(200).send('You liked this video!');
 		}
 	} catch (error) {
-		return next(createError(500, 'Something went wrong'));
+		return next(createError(500, 'Error on like video'));
 	}
 };
 
@@ -128,6 +128,6 @@ export const dislike = async (req, res, next) => {
 			res.status(200).send('You disliked this video!');
 		}
 	} catch (error) {
-		return next(createError(500, 'Something went wrong'));
+		return next(createError(500, 'Error on dislike video'));
 	}
 };

@@ -33,7 +33,7 @@ app.use('/api/v1/videos', videoRouter);
 // TODO: Make this as middleware
 app.use((error, req, res, next) => {
 	const status = error.status || 500;
-	const message = error.message || 'Something went wrong';
+	const message = error.message || 'Something went wrong on server';
 	return res.status(status).json({
 		success: false,
 		status,
