@@ -138,7 +138,7 @@ export const getVideoByTag = async (req, res, next) => {
 };
 
 export const searchVideo = async (req, res, next) => {
-	const query = req.query.qr;
+	const query = req.query.byTitle;
 
 	try {
 		const videosByQuery = await VideoModel.find({
