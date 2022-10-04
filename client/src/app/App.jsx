@@ -4,7 +4,7 @@ import { Sidebar, Navbar, Burger } from '../components';
 import { darkTheme, lightTheme } from '../utils/theme';
 import { AppContainer, AppMain, AppWrapper } from './App.styled';
 import { Route, Routes } from 'react-router-dom';
-import { Home, SignIn, Video } from '../pages';
+import { Home, SignIn, Video, Search } from '../pages';
 import { useOnClickOutside } from '../hooks/useOnClickOutside';
 
 export const App = () => {
@@ -23,12 +23,7 @@ export const App = () => {
 
 	return (
 		<ThemeProvider theme={currentTheme}>
-			<Sidebar
-				changeTheme={changeThemeMode}
-				//menuRef={menuRef}
-				isDarkMode={isDarkMode}
-				open={open}
-			/>
+			<Sidebar changeTheme={changeThemeMode} isDarkMode={isDarkMode} open={open} />
 			<AppContainer>
 				<AppMain>
 					<Navbar>
@@ -44,6 +39,7 @@ export const App = () => {
 								<Route path='video'>
 									<Route path=':id' element={<Video />} />
 								</Route>
+								<Route path='search' element={<Search />} />
 							</Route>
 						</Routes>
 					</AppWrapper>

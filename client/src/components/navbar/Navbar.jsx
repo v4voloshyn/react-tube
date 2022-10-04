@@ -1,25 +1,70 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { ExitToAppOutlined, Person, SearchOutlined, VideoCallOutlined } from '@mui/icons-material';
 import { LinkBtn, Logo, SCButton, SCLink } from '../UI';
-import { Avatar, NavContainer, NavInput, NavSearch, NavWrapper, User } from './Navbar.styled';
+import {
+	Avatar,
+	NavContainer,
+	NavInput,
+	NavSearch,
+	NavWrapper,
+	Picture,
+	User,
+} from './Navbar.styled';
 import LogoImg from '../../assets/logo.webp';
-import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/userSlice';
-import axios from 'axios';
-import { Upload } from '../upload/Upload';
+import { Upload } from '../upload';
 
 export const Navbar = ({ children }) => {
 	const [isShown, setIsShown] = useState(false);
+	const [searchQuery, setSearchQuery] = useState('');
+	const searchInputRef = useRef(null);
+
+	const navigate = useNavigate();
+	const URL = useLocation().pathname;
 
 	const userData = useSelector((state) => state.user.data);
 	const dispatch = useDispatch();
 
 	const logOut = async () => {
 		axios.get(`/auth/logout`).then((resp) => {
-			console.log('resp :>> ', resp);
 			dispatch(logout());
 		});
 	};
+
+	const handleSearchInput = (e) => {
+		setSearchQuery(e.target.value);
+	};
+
+	const handleSearch = useCallback(() => {
+		if (!searchQuery.length) return;
+
+		navigate(`/search?byTitle=${searchQuery}`);
+	}, [navigate, searchQuery]);
+
+	const handleEnterPress = useCallback(
+		(e) => {
+			if (e.code === 'Enter' && document.activeElement === searchInputRef.current) {
+				console.log('e.code', e.code);
+				handleSearch();
+			}
+		},
+		[handleSearch]
+	);
+
+	useEffect(() => {
+		document.addEventListener('keyup', handleEnterPress);
+
+		return () => {
+			document.removeEventListener('keyup', handleEnterPress);
+		};
+	}, [handleEnterPress]);
+
+	useEffect(() => {
+		setSearchQuery('');
+	}, [URL]);
 
 	return (
 		<>
@@ -32,13 +77,20 @@ export const Navbar = ({ children }) => {
 						</SCLink>
 					</Logo>
 					<NavSearch>
-						<NavInput placeholder='Search' />
-						<SearchOutlined />
+						<NavInput
+							ref={searchInputRef}
+							placeholder='Search'
+							value={searchQuery}
+							onChange={handleSearchInput}
+						/>
+						<SearchOutlined style={{ cursor: 'pointer' }} onClick={handleSearch} />
 					</NavSearch>
 					{userData ? (
 						<User>
 							<VideoCallOutlined style={{ cursor: 'pointer' }} onClick={() => setIsShown(true)} />
-							<Avatar src={userData.img} />
+							<Picture>
+								<Avatar src={userData.img} />
+							</Picture>
 							{userData.name}
 							<SCButton onClick={logOut}>
 								<ExitToAppOutlined />
