@@ -20,8 +20,11 @@ import {
 	Person,
 } from '@mui/icons-material';
 import { SCLink, Hr, LinkBtn, Logo } from '../UI';
+import { useSelector } from 'react-redux';
 
 export const Sidebar = ({ changeTheme, isDarkMode, open, menuRef }) => {
+	const userData = useSelector((state) => state.user.data);
+
 	return (
 		<Container open={open} ref={menuRef}>
 			<Wrapper>
@@ -60,14 +63,19 @@ export const Sidebar = ({ changeTheme, isDarkMode, open, menuRef }) => {
 					History
 				</Item>
 				<Hr />
-				<Login>
-					Sign in to like videos, comment, and subscribe.
-					<LinkBtn to='signin'>
-						<Person />
-						SIGN IN
-					</LinkBtn>
-				</Login>
-				<Hr />
+				{userData ? null : (
+					<>
+						<Login>
+							Sign in to like videos, comment, and subscribe.
+							<LinkBtn to='signin'>
+								<Person />
+								SIGN IN
+							</LinkBtn>
+						</Login>
+						<Hr />
+					</>
+				)}
+
 				<Title>Best of react tube</Title>
 				<Item>
 					<LibraryMusic />

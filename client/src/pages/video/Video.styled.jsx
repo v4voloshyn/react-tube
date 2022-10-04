@@ -103,13 +103,14 @@ export const SubscribeBtn = styled.button`
 	display: flex;
 	align-items: center;
 	height: max-content;
-	background-color: #cf2305;
+	background-color: ${({ isSub, theme }) => (isSub ? theme.hrColor : '#cf2305')};
 	border: 2px solid transparent;
 	border-radius: 3px;
-	color: #fff;
+	color: ${({ theme }) => theme.textColor};
 	cursor: pointer;
+	transition: all ease-in-out 0.3s;
 
 	&:hover {
-		background-color: #ff2600;
+		box-shadow: ${({ theme }) => theme.shadow};
 	}
 `;

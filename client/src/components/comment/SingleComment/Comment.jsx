@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	AuthorImg,
 	AuthorName,
@@ -8,22 +8,35 @@ import {
 	CommentText,
 	CommentContainer,
 } from './Comment.styled';
-import ChanelLogo from '../../../assets/avatar.png';
+import { format } from 'timeago.js';
+import axios from 'axios';
 
-export const Comment = () => {
+export const Comment = (comment) => {
+	const [commentUser, setCommentUser] = useState({});
+
+	useEffect(() => {
+		const fetchCommentAuthor = async () => {
+			const resp = await axios.get(`/users/find/${comment.userId}`);
+			setCommentUser(resp.data);
+		};
+
+		fetchCommentAuthor();
+	}, [comment.userId]);
+
+	const setFullURL = (url = '') => {
+		return url.includes('https://') || url.includes('http://') ? url : `https://${url}`;
+	};
+
 	return (
 		<CommentContainer>
 			<CommentInfo>
-				<AuthorImg src={ChanelLogo} />
+				<AuthorImg src={setFullURL(commentUser.img)} />
 				<CommentDetails>
 					<AuthorName>
-						Batman
-						<CommentDate>59 minutes ago</CommentDate>
+						{commentUser.name}
+						<CommentDate>{format(comment.createdAt)}</CommentDate>
 					</AuthorName>
-					<CommentText>
-						Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque magnam ratione
-						dolor aliquid quisquam officiis exercitationem natus labore veniam dolores?
-					</CommentText>
+					<CommentText>{comment.text}</CommentText>
 				</CommentDetails>
 			</CommentInfo>
 		</CommentContainer>

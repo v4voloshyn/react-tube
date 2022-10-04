@@ -55,3 +55,27 @@ export const NavButton = styled.button`
 	gap: 8px;
 	font-weight: 500;
 `;
+
+export const User = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	color: ${({ theme }) => theme.textColor};
+`;
+
+export const Picture = styled.div`
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background-color: #999;
+`;
+
+export const Avatar = styled.img`
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	object-fit: cover;
+	outline: none;
+	font-size: 0;
+	display: flex;
+`;

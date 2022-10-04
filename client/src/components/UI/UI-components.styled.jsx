@@ -26,6 +26,25 @@ export const Logo = styled.div`
 	white-space: nowrap;
 `;
 
+export const SCButton = styled.button`
+	height: 100%;
+	width: max-content;
+	display: flex;
+	align-items: center;
+	gap: 3px;
+	font-weight: 500;
+	font-size: 0.85rem;
+	white-space: nowrap;
+	cursor: pointer;
+	color: ${({ theme }) => theme.textColor};
+	background-color: ${({ theme }) => theme.bgLighterColor};
+	border: 1px solid ${({ theme }) => theme.bgLighterColor};
+	transition: box-shadow 0.2s ease-in-out;
+	&:hover {
+		box-shadow: ${({ theme }) => theme.shadow};
+	}
+`;
+
 export const LinkBtn = styled(Link)`
 	display: flex;
 	align-items: center;
