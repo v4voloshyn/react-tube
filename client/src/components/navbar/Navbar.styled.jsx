@@ -63,9 +63,19 @@ export const User = styled.div`
 	color: ${({ theme }) => theme.textColor};
 `;
 
-export const Avatar = styled.img`
+export const Picture = styled.div`
 	width: 32px;
 	height: 32px;
 	border-radius: 50%;
 	background-color: #999;
+`;
+
+export const Avatar = styled.img`
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	object-fit: cover;
+	outline: none;
+	font-size: 0;
+	display: flex;
 `;

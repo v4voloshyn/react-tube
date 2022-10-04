@@ -51,6 +51,7 @@ export const Input = styled.input`
 
 	&[type='file'] {
 		cursor: pointer;
+		min-height: 45px;
 	}
 `;
 
