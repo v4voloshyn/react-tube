@@ -6,6 +6,7 @@ import { userRouter } from './routes/userRouter.js';
 import { commentRouter } from './routes/commentRouter.js';
 import { videoRouter } from './routes/videoRouter.js';
 import { authRouter } from './routes/authRouter.js';
+import { errorHandler } from './middlewares/errorHandler.js';
 
 dotenv.config();
 
@@ -17,7 +18,7 @@ const connectDB = async () => {
 		const connection = await mongoose.connect(process.env.MONGO_URI);
 		console.log(`MongoDB connected: ${connection.connection.host}`);
 	} catch (error) {
-		console.log(`Error : ${error.message}`);
+		console.log(`Connection error: ${error.message}`);
 		process.exit(1);
 	}
 };
@@ -30,15 +31,6 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/comments', commentRouter);
 app.use('/api/v1/videos', videoRouter);
 
-// TODO: Make this as middleware
-app.use((error, req, res, next) => {
-	const status = error.status || 500;
-	const message = error.message || 'Something went wrong on server';
-	return res.status(status).json({
-		success: false,
-		status,
-		message,
-	});
-});
+app.use(errorHandler);
 
 app.listen(PORT, connectDB(), () => console.log(`Server is running on ${PORT} PORT`));
