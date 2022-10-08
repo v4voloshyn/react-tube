@@ -98,7 +98,7 @@ export const hotVideo = async (req, res, next) => {
 
 export const randomVideo = async (req, res, next) => {
 	try {
-		const videos = await VideoModel.aggregate([{ $sample: { size: 12 } }]);
+		const videos = await VideoModel.aggregate([{ $sample: { size: 20 } }]);
 
 		res.status(200).json(videos);
 	} catch (error) {
@@ -129,7 +129,7 @@ export const getVideoByTag = async (req, res, next) => {
 
 		const videos = await VideoModel.find({
 			tags: { $in: tags },
-		}).limit(6);
+		}).limit(20);
 
 		res.status(200).json(videos);
 	} catch (error) {
@@ -142,7 +142,7 @@ export const searchVideo = async (req, res, next) => {
 
 	try {
 		const videosByQuery = await VideoModel.find({
-			title: { $regex: query, $options: 'i' },
+			$or: [{ title: { $regex: query, $options: 'i' } }, { tags: { $in: [query] } }],
 		}).limit(20);
 
 		res.status(200).json(videosByQuery);
