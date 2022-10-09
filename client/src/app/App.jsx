@@ -40,9 +40,9 @@ export const App = () => {
 					<AppWrapper>
 						<Routes>
 							<Route path='/'>
-								<Route index element={<Home type={'random'} />} />
-								<Route path='hot' element={<Home type={'hot'} />} />
-								<Route path='subscriptions' element={<Home type={'subscriptions'} />} />
+								<Route index element={<Home pageType={'random'} />} />
+								<Route path='hot' element={<Home pageType={'hot'} />} />
+								<Route path='subscriptions' element={<Home pageType={'subscriptions'} />} />
 								<Route path='signin' element={<SignIn />} />
 								<Route path='video'>
 									<Route path=':id' element={<Video />} />
