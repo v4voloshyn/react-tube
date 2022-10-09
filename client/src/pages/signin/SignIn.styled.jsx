@@ -4,7 +4,7 @@ export const SignInContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: calc(100vh - 56px);
+	height: 100%;
 	color: ${({ theme }) => theme.textColor};
 `;
 
@@ -17,6 +17,7 @@ export const SignInWrapper = styled.div`
 	background-color: ${({ theme }) => theme.bgLighterColor};
 	box-shadow: ${({ theme }) => theme.shadow};
 	padding: 20px 50px;
+	margin: 20px;
 `;
 
 export const SignInTitle = styled.h2`
