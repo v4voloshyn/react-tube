@@ -3,8 +3,9 @@ import bcrypt from 'bcryptjs';
 import { createError } from '../helpers/error.js';
 import jwt from 'jsonwebtoken';
 
-// TODO: write documentation to every single function
-
+// @desc  Register new user
+// @route POST '/api/v1/auth/signup'
+// @acces Public
 export const signUp = async (req, res, next) => {
 	try {
 		const data = req.body;
@@ -23,6 +24,9 @@ export const signUp = async (req, res, next) => {
 	}
 };
 
+// @desc  Authenticate a user
+// @route POST '/api/v1/auth/signin'
+// @acces Public
 export const signIn = async (req, res, next) => {
 	try {
 		const user = await User.findOne({ name: req.body.name });
@@ -48,6 +52,9 @@ export const signIn = async (req, res, next) => {
 	}
 };
 
+// @desc  SignUp or SignIn through Google account
+// @route POST '/api/v1/auth/google'
+// @acces Public
 export const googleAuth = async (req, res, next) => {
 	try {
 		const user = await User.findOne({ email: req.body.email });
@@ -74,7 +81,7 @@ export const googleAuth = async (req, res, next) => {
 };
 
 // @desc    Logout controller to clear cookie and token
-// @route   GET /api/v1/auth/logout
+// @route   GET '/api/v1/auth/logout'
 // @access  Private
 export const cleanCookiesAndLogout = async (req, res, next) => {
 	try {

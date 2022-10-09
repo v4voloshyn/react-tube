@@ -2,6 +2,9 @@ import { createError } from '../helpers/error.js';
 import VideoModel from '../models/Video.js';
 import CommentModel from '../models/Comment.js';
 
+// @desc  Get comments by video ID
+// @route GET '/api/v1/comments/:videoId'
+// @acces Public
 export const getComments = async (req, res, next) => {
 	try {
 		const allComments = await CommentModel.find({
@@ -14,6 +17,9 @@ export const getComments = async (req, res, next) => {
 	}
 };
 
+// @desc  Add comment to video
+// @route POST '/api/v1/comments/'
+// @acces Private
 export const addComment = async (req, res, next) => {
 	const newComment = new CommentModel({
 		...req.body,
@@ -29,6 +35,9 @@ export const addComment = async (req, res, next) => {
 	}
 };
 
+// @desc  Delete comment
+// @route DELETE '/api/v1/comments/:id'
+// @acces Private
 export const deleteComment = async (req, res, next) => {
 	try {
 		const comment = await CommentModel.findById(req.params.id);
