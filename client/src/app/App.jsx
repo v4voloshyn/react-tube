@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Sidebar, Navbar, Burger } from '../components';
 import { darkTheme, lightTheme } from '../utils/theme';
@@ -13,13 +13,21 @@ export const App = () => {
 
 	const burgerRef = useRef(null);
 
+	const currentTheme = isDarkMode ? darkTheme : lightTheme;
+
 	useOnClickOutside(burgerRef, () => setOpen(false));
 
 	const changeThemeMode = useCallback(() => {
+		localStorage.getItem('tube_theme') === 'dark'
+			? localStorage.setItem('tube_theme', 'light')
+			: localStorage.setItem('tube_theme', 'dark');
+
 		setDarkMode((mode) => !mode);
 	}, []);
 
-	const currentTheme = isDarkMode ? darkTheme : lightTheme;
+	useEffect(() => {
+		localStorage.getItem('tube_theme') === 'dark' ? setDarkMode(true) : setDarkMode(false);
+	}, []);
 
 	return (
 		<ThemeProvider theme={currentTheme}>
