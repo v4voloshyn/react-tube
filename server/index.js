@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import { userRouter } from './routes/userRouter.js';
 import { commentRouter } from './routes/commentRouter.js';
@@ -23,6 +24,9 @@ const connectDB = async () => {
 	}
 };
 
+if (process.env.NODE_ENV === 'development') {
+	app.use(morgan('dev'));
+}
 app.use(express.json());
 app.use(cookieParser());
 
