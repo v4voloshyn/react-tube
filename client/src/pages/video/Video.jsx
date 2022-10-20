@@ -20,7 +20,7 @@ import {
 	likeVideo,
 	setVideoError,
 } from '../../redux/videoSlice';
-import { subscribeOnChannel } from '../../redux/userSlice';
+import { loginFailure, loginStart, subscribeOnChannel } from '../../redux/userSlice';
 import { api } from '../../axios/instance';
 import { toast } from 'react-toastify';
 import { Hr, ChannelImg } from '../../components/UI';
@@ -77,8 +77,8 @@ export const Video = () => {
 	};
 
 	const handleSubscribe = async () => {
+		dispatch(loginStart()); // Clean errors on user auth (useEffect problem in App.jsx)
 		let response;
-		dispatch(cleanVideoError());
 		try {
 			if (currentUser && currentUser.subscribedUsers.includes(channelData._id)) {
 				response = await api.put(`/users/unsub/${channelData._id}`); // TODO Handle case in REDUX when user is not logined
@@ -92,7 +92,7 @@ export const Video = () => {
 			}
 		} catch (error) {
 			console.log(error);
-			dispatch(setVideoError(error.response.data.message));
+			dispatch(loginFailure(error.response.data.message));
 		}
 	};
 

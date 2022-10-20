@@ -63,7 +63,6 @@ export const SignIn = () => {
 
 			dispatch(loginSuccess(response.data));
 		} catch (error) {
-			console.log('errorMessage', error);
 			dispatch(loginFailure(error.response.data.message));
 		}
 	};
