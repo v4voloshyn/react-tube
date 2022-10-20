@@ -10,7 +10,7 @@ export const signUp = async (req, res, next) => {
 	try {
 		const reqData = req.body;
 		if(!reqData.name || !reqData.email|| !reqData.password) {
-			return next(createError(400, 'All fields a required to fill'));
+			return next(createError(400, 'All Sign Up fields a required to fill'));
 		}
 		// Check if user exist
 		const isUserExist = await User.findOne({email: reqData.email})
@@ -40,6 +40,10 @@ export const signUp = async (req, res, next) => {
 // @route POST '/api/v1/auth/signin'
 // @acces Public
 export const signIn = async (req, res, next) => {
+	const reqData = req.body;
+		if(!reqData.name || !reqData.password) {
+			return next(createError(400, 'All Sign In fields a required to fill'));
+		}
 	try {
 		const user = await User.findOne({ name: req.body.name });
 
