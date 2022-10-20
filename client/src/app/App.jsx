@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 import { ThemeProvider } from 'styled-components';
 import { Sidebar, Navbar, Burger } from '../components';
 import { darkTheme, lightTheme } from '../utils/theme';
@@ -10,8 +12,8 @@ import { useOnClickOutside } from '../hooks/useOnClickOutside';
 export const App = () => {
 	const [isDarkMode, setDarkMode] = useState(true);
 	const [open, setOpen] = useState(false);
-
 	const burgerRef = useRef(null);
+	const { error, errorMessage } = useSelector((state) => state.user);
 
 	const currentTheme = isDarkMode ? darkTheme : lightTheme;
 
@@ -28,6 +30,12 @@ export const App = () => {
 	useEffect(() => {
 		localStorage.getItem('tube_theme') === 'dark' ? setDarkMode(true) : setDarkMode(false);
 	}, []);
+
+	useEffect(() => {
+		if (error) {
+			toast.error(errorMessage);
+		}
+	}, [error, errorMessage]);
 
 	return (
 		<ThemeProvider theme={currentTheme}>
@@ -53,6 +61,17 @@ export const App = () => {
 					</AppWrapper>
 				</AppMain>
 			</AppContainer>
+			<ToastContainer
+				position='bottom-right'
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme='dark'
+			/>
 		</ThemeProvider>
 	);
 };
