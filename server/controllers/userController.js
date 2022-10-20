@@ -2,6 +2,9 @@ import { createError } from '../helpers/error.js';
 import UserModel from '../models/User.js';
 import VideoModel from '../models/Video.js';
 
+// @desc    Update user account info
+// @route   PUT '/api/v1/users/:id'
+// @access  Private
 export const updateUser = async (req, res, next) => {
 	if (req.params.id === req.user.id) {
 		try {
@@ -22,6 +25,9 @@ export const updateUser = async (req, res, next) => {
 	}
 };
 
+// @desc    Delete user
+// @route   DELETE '/api/v1/users/:id'
+// @access  Private
 export const deleteUser = async (req, res, next) => {
 	if (req.params.id === req.user.id) {
 		try {
@@ -36,6 +42,9 @@ export const deleteUser = async (req, res, next) => {
 	}
 };
 
+// @desc    Get user
+// @route   GET '/api/v1/users/:id'
+// @access  Public
 export const getUser = async (req, res, next) => {
 	try {
 		const user = await UserModel.findById(req.params.id).select('-password');
@@ -44,28 +53,41 @@ export const getUser = async (req, res, next) => {
 		}
 		return res.status(200).json(user);
 	} catch (error) {
-		return next(createError(500, 'Something went wrong'));
+		return next(createError(500, 'Something went wrong trying to get user'));
 	}
 };
 
 // TODO: fix subscribe to myself
 // TODO: fix subscribe more then one. Hint: use like/dislike principle below
+// @desc    Subsribe on channel
+// @route   PUT '/api/v1/users/sub/:id'
+// @access  Private
 export const subscribeUser = async (req, res, next) => {
 	try {
-		await UserModel.findByIdAndUpdate(req.user.id, {
-			$push: { subscribedUsers: req.params.id },
-		});
+		const channel = await UserModel.findById(req.params.id);
+		console.log('subscribedUser :>> ', channel.subscribers);
+		if (
+			channel._id &&
+			!channel.subscribedUsers.includes(req.user.id) &&
+			req.user.id !== req.params.id
+		) {
+			await UserModel.findByIdAndUpdate(req.user.id, {
+				$push: { subscribedUsers: req.params.id },
+			});
+			await UserModel.findByIdAndUpdate(req.params.id, {
+				$inc: { subscribers: 1 },
+			});
 
-		await UserModel.findByIdAndUpdate(req.params.id, {
-			$inc: { subscribers: 1 },
-		});
-
-		res.status(200).json('Successfull subscribe');
+			res.status(200).json('Successfull subscribe');
+		}
 	} catch (error) {
-		return next(createError(500, 'Something went wrong'));
+		return next(createError(500, 'Something went wrong on subscribe'));
 	}
 };
 
+// @desc    Channel unsubscribe
+// @route   PUT '/api/v1/users/unsub/:id'
+// @access  Private
 export const unsubscribeUser = async (req, res, next) => {
 	try {
 		await UserModel.findByIdAndUpdate(req.user.id, {
@@ -78,10 +100,13 @@ export const unsubscribeUser = async (req, res, next) => {
 
 		res.status(200).json('Successfull UNsubscribe');
 	} catch (error) {
-		return next(createError(500, 'Something went wrong'));
+		return next(createError(500, 'Something went wrong on unsubscribe'));
 	}
 };
 
+// @desc    Like video
+// @route   PUT '/api/v1/users/like/:videoId'
+// @access  Private
 export const like = async (req, res, next) => {
 	const userId = req.user.id;
 	const videoId = req.params.videoId;
@@ -102,10 +127,13 @@ export const like = async (req, res, next) => {
 			res.status(200).send('You liked this video!');
 		}
 	} catch (error) {
-		return next(createError(500, 'Something went wrong'));
+		return next(createError(500, 'Error on like video'));
 	}
 };
 
+// @desc    Disike video
+// @route   PUT '/api/v1/users/dislike/:videoId'
+// @access  Private
 export const dislike = async (req, res, next) => {
 	const userId = req.user.id;
 	const videoId = req.params.videoId;
@@ -128,6 +156,6 @@ export const dislike = async (req, res, next) => {
 			res.status(200).send('You disliked this video!');
 		}
 	} catch (error) {
-		return next(createError(500, 'Something went wrong'));
+		return next(createError(500, 'Error on dislike video'));
 	}
 };

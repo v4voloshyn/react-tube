@@ -10,14 +10,19 @@ import {
 
 import { Hr } from '../../components/UI';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginStart, loginSuccess } from '../../redux/userSlice';
 import { auth, provider } from '../../firebase';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { signInWithPopup } from 'firebase/auth';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const SignIn = () => {
 	const [formData, setFormData] = useState({});
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const userData = useSelector((state) => state.user.data);
 
 	const setData = (e) => {
 		const { name, value } = e.target;
@@ -52,18 +57,19 @@ export const SignIn = () => {
 						img: user.photoURL,
 					})
 					.then((resp) => {
-						console.log('resp :>> ', resp);
 						dispatch(loginSuccess(resp.data));
 					});
 			})
-
 			.catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
 				dispatch(loginFailure(error));
 			});
 	};
 
+	useEffect(() => {
+		if (userData) {
+			navigate('/');
+		}
+	}, [userData, navigate]);
 	return (
 		<SignInContainer>
 			<SignInWrapper>

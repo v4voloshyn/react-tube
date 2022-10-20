@@ -5,23 +5,23 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-export const Home = ({ type }) => {
+export const Home = ({ pageType }) => {
 	const [videos, setVideos] = useState([]);
 	const isAuth = useSelector((state) => !!state.user?.data?._id);
 
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (type === 'subscriptions' && !isAuth) {
+		if (pageType === 'subscriptions' && !isAuth) {
 			navigate('/signin');
 		}
 		const getVideos = async () => {
-			const response = await axios.get(`/videos/${type}`);
+			const response = await axios.get(`/videos/${pageType}`);
 			setVideos(response.data);
 		};
 
 		getVideos();
-	}, [type, isAuth, navigate]);
+	}, [pageType, isAuth, navigate]);
 
 	return (
 		<HomeContainer>
