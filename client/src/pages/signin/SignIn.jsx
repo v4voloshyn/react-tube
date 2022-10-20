@@ -37,9 +37,7 @@ export const SignIn = () => {
 		const { signin_username: name, signin_password: password } = formData;
 		try {
 			const response = await api.post('/auth/signin', { name, password });
-			if (response.status !== 200) {
-				throw new Error('message');
-			}
+
 			dispatch(loginSuccess(response.data));
 		} catch (error) {
 			console.log('errorMessage', error);
