@@ -8,17 +8,29 @@ import jwt from 'jsonwebtoken';
 // @acces Public
 export const signUp = async (req, res, next) => {
 	try {
-		const data = req.body;
+		const reqData = req.body;
+		if(!reqData.name || !reqData.email|| !reqData.password) {
+			return next(createError(400, 'All fields a required to fill'));
+		}
+		// Check if user exist
+		const isUserExist = await User.findOne({email: reqData.email})
+		if(isUserExist) {
+			next(createError(400, 'This user email is already exist'));
+		}
+
 		const salt = bcrypt.genSaltSync(10);
-		const hashedPw = bcrypt.hashSync(data.password, salt);
+		const hashedPassword = bcrypt.hashSync(reqData.password, salt);
 		const newUser = new User({
-			...data,
-			password: hashedPw,
+			...reqData,
+			password: hashedPassword,
 		});
 
-		await newUser.save();
+		const savedUser = await newUser.save();
+		const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET);
 
-		res.status(201).json('User has been created');
+		res.cookie('access_token', token, { httpOnly: true });
+		const {password, ...userData} = savedUser._doc
+		res.status(201).json(userData);
 	} catch (error) {
 		next(error);
 	}
