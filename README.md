@@ -73,12 +73,17 @@
  - - ⬜ Edit comment
  - - ⬜ Delete comment
 
-⭕ **General:**
+🔶 **General:**
  - ✅ Connect Redux for: 
  - - ✅ User data storage
  - - ✅ Video data storage
- - ⬜ 🔴  Handle signin/login errors with toastify
- - ⬜ 🔴  Handle upload videos with toastify
+<hr/>
+
+⭕ **FIX:**
+
+-  ✅ Signin/login errors with toastify
+ - ⬜ Upload videos with toastify
+ - ⬜ Google Auth error when close SignIn with Google popup
   
 <hr/>
 
