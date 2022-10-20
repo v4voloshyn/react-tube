@@ -1,14 +1,14 @@
  # Video-hosting
  ## Written with React as a frontend side and Node+Express as a backend side
  
- Preview link : TBD soon...
+ Preview link : [Click](https://ua-tube.herokuapp.com/)
  =====
 
  ### Tech stack:
  - React, React-Router, Styled-components;
  - Node.js, Express, JWT for authorization, cookies for saving auth token;
  - MongoDB for storing user data
- - Firebase for Google Auth and as a cloud storage for videos and images;
+ - Firebase for Google Auth and as a cloud storage for uploaded videos and images;
 
  #### 📝 **TODO**:
 🔷 **Frontend:**
@@ -73,12 +73,17 @@
  - - ⬜ Edit comment
  - - ⬜ Delete comment
 
-⭕ **General:**
+🔶 **General:**
  - ✅ Connect Redux for: 
  - - ✅ User data storage
  - - ✅ Video data storage
- - ⬜ 🔴  Handle signin/login errors with toastify
- - ⬜ 🔴  Handle upload videos with toastify
+<hr/>
+
+⭕ **FIX:**
+
+-  ✅ Signin/login errors with toastify
+ - ⬜ Upload videos with toastify
+ - ⬜ Google Auth error when close SignIn with Google popup
   
 <hr/>
 

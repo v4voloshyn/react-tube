@@ -45,6 +45,29 @@ export const SignIn = () => {
 		}
 	};
 
+	const handleSignUp = async (e) => {
+		e.preventDefault();
+		dispatch(loginStart());
+		const {
+			signup_username: name,
+			signup_email: email,
+			signup_password: password,
+			repeat_password: repeatPassword,
+		} = formData;
+		if (password !== repeatPassword) {
+			throw new Error(`Passwords do not match. Please try again`);
+		}
+
+		try {
+			const response = await api.post('/auth/signup', { name, email, password });
+
+			dispatch(loginSuccess(response.data));
+		} catch (error) {
+			console.log('errorMessage', error);
+			dispatch(loginFailure(error.response.data.message));
+		}
+	};
+
 	const googleSignIn = async () => {
 		signInWithPopup(auth, provider)
 			.then((result) => {
@@ -98,8 +121,13 @@ export const SignIn = () => {
 					placeholder='Your password'
 					onChange={setData}
 				/>
-				<SignInInput type='password' placeholder='Repeat your password' />
-				<SignInButton>Sign up</SignInButton>
+				<SignInInput
+					type='password'
+					placeholder='Repeat your password'
+					name='repeat_password'
+					onChange={setData}
+				/>
+				<SignInButton onClick={handleSignUp}>Sign up</SignInButton>
 			</SignInWrapper>
 		</SignInContainer>
 	);
