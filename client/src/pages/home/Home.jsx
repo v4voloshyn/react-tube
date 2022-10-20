@@ -17,6 +17,7 @@ export const Home = ({ pageType }) => {
 	useEffect(() => {
 		if (pageType === 'subscriptions' && !isAuth) {
 			navigate('/signin');
+			return;
 		}
 		const getVideos = async () => {
 			const response = await api.get(`/videos/${pageType}`);
