@@ -12,11 +12,13 @@ import {
 } from '@mui/icons-material';
 
 import {
+	cleanVideoError,
 	dislikeVideo,
 	fetchVideoFailure,
 	fetchVideoStart,
 	fetchVideoSuccess,
 	likeVideo,
+	setVideoError,
 } from '../../redux/videoSlice';
 import { subscribeOnChannel } from '../../redux/userSlice';
 import { api } from '../../axios/instance';
@@ -75,18 +77,22 @@ export const Video = () => {
 	};
 
 	const handleSubscribe = async () => {
-		if (!currentUserID) {
-			toast.error('Please, Sign in first');
-			return;
-		}
 		let response;
-		if (currentUser.subscribedUsers.includes(channelData._id)) {
-			response = await api.put(`/users/unsub/${channelData._id}`);
-		} else {
-			response = await api.put(`/users/sub/${channelData._id}`);
-		}
-		if (response.statusText === 'OK') {
-			dispatch(subscribeOnChannel(channelData._id));
+		dispatch(cleanVideoError());
+		try {
+			if (currentUser && currentUser.subscribedUsers.includes(channelData._id)) {
+				response = await api.put(`/users/unsub/${channelData._id}`); // TODO Handle case in REDUX when user is not logined
+			} else {
+				response = await api.put(`/users/sub/${channelData._id}`);
+			}
+			if (response.statusText === 'OK') {
+				dispatch(subscribeOnChannel(channelData._id));
+			} else {
+				throw new Error();
+			}
+		} catch (error) {
+			console.log(error);
+			dispatch(setVideoError(error.response.data.message));
 		}
 	};
 
