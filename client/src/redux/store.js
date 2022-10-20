@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import userReducer from './userSlice';
-import videoSlice from './videoSlice';
+import videoReducer from './videoSlice';
 import {
 	persistStore,
 	persistReducer,
@@ -13,18 +13,31 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-const rootReducer = combineReducers({
-	user: userReducer,
-	video: videoSlice,
-});
-
-const persistConfig = {
+const rootPersistConfig = {
 	key: 'root',
 	version: 1,
 	storage,
+	blacklist: ['video', 'user'],
+};
+const videoPersistConfig = {
+	key: 'video',
+	version: 1,
+	storage,
+	blacklist: ['errorMessage', 'error'],
+};
+const userPersistConfig = {
+	key: 'user',
+	version: 1,
+	storage,
+	blacklist: ['errorMessage', 'error'],
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const rootReducer = combineReducers({
+	user: persistReducer(userPersistConfig, userReducer),
+	video: persistReducer(videoPersistConfig, videoReducer),
+});
+
+const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
 export const store = configureStore({
 	reducer: persistedReducer,

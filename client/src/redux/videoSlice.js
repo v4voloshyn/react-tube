@@ -52,10 +52,26 @@ const videoSlice = createSlice({
 				state.data.dislikes.push(userID);
 			}
 		},
+		cleanVideoError: (state) => {
+			state.error = false;
+			state.errorMessage = '';
+		},
+		setVideoError: (state, action) => {
+			state.isLoading = false;
+			state.error = true;
+			state.errorMessage = action.payload;
+		},
 	},
 });
 
-export const { fetchVideoStart, fetchVideoSuccess, fetchVideoFailure, likeVideo, dislikeVideo } =
-	videoSlice.actions;
+export const {
+	fetchVideoStart,
+	fetchVideoSuccess,
+	fetchVideoFailure,
+	likeVideo,
+	dislikeVideo,
+	cleanVideoError,
+	setVideoError,
+} = videoSlice.actions;
 
 export default videoSlice.reducer;

@@ -1,20 +1,26 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
-import { ThemeProvider } from 'styled-components';
-import { Sidebar, Navbar, Burger } from '../components';
-import { darkTheme, lightTheme } from '../utils/theme';
-import { AppContainer, AppMain, AppWrapper } from './App.styled';
 import { Route, Routes } from 'react-router-dom';
-import { Home, SignIn, Video, Search } from '../pages';
+import { useSelector } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
+import { ToastContainer, toast } from 'react-toastify';
+
 import { useOnClickOutside } from '../hooks/useOnClickOutside';
+import { darkTheme, lightTheme } from '../utils/theme';
+
+import { Home, SignIn, Video, Search } from '../pages';
+import { Sidebar, Navbar, Burger } from '../components';
+
+import { AppContainer, AppMain, AppWrapper } from './App.styled';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
 	const [isDarkMode, setDarkMode] = useState(true);
 	const [open, setOpen] = useState(false);
 	const burgerRef = useRef(null);
-	const { error, errorMessage } = useSelector((state) => state.user);
+	const { error: userError, errorMessage: userErrorMessage } = useSelector((state) => state.user);
+	const { error: videoError, errorMessage: videoErrorMessage } = useSelector(
+		(state) => state.video
+	);
 
 	const currentTheme = isDarkMode ? darkTheme : lightTheme;
 
@@ -33,10 +39,9 @@ export const App = () => {
 	}, []);
 
 	useEffect(() => {
-		if (error) {
-			toast.error(errorMessage);
-		}
-	}, [error, errorMessage]);
+		userError && toast.error(userErrorMessage);
+		videoError && toast.error(videoErrorMessage);
+	}, [userError, userErrorMessage, videoError, videoErrorMessage]);
 
 	return (
 		<ThemeProvider theme={currentTheme}>
@@ -67,7 +72,7 @@ export const App = () => {
 					hideProgressBar={false}
 					newestOnTop={false}
 					closeOnClick
-					pauseOnFocusLoss
+					pauseOnFocusLoss={false}
 					draggable
 					pauseOnHover
 					theme='dark'

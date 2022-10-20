@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { uploadFile } from './helpers/uploadFile';
 import { api } from '../../axios/instance';
@@ -39,7 +40,10 @@ export const Upload = ({ setIsShown }) => {
 	const handleUpload = async (e) => {
 		e.preventDefault();
 
-		if (!textInputs.title || !tags.length || !image || !video) return;
+		if (!textInputs.title || !tags.length || !image || !video) {
+			toast.warn('All fields are required');
+			return;
+		}
 
 		const [videoUrl, imgUrl] = await Promise.all([
 			uploadFile(video, setVideoPerc),
