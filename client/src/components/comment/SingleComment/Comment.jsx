@@ -1,4 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { format } from 'timeago.js';
+
+import { api } from '../../../axios/instance';
+
 import {
 	AuthorImg,
 	AuthorName,
@@ -8,15 +12,13 @@ import {
 	CommentText,
 	CommentContainer,
 } from './Comment.styled';
-import { format } from 'timeago.js';
-import axios from 'axios';
 
 export const Comment = (comment) => {
 	const [commentUser, setCommentUser] = useState({});
 
 	useEffect(() => {
 		const fetchCommentAuthor = async () => {
-			const resp = await axios.get(`/users/find/${comment.userId}`);
+			const resp = await api.get(`/users/find/${comment.userId}`);
 			setCommentUser(resp.data);
 		};
 

@@ -1,8 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { ExitToAppOutlined, Person, SearchOutlined, VideoCallOutlined } from '@mui/icons-material';
+
+import { api } from '../../axios/instance';
+import { logout } from '../../redux/userSlice';
+
+import { Upload } from '../upload';
+
 import { LinkBtn, Logo, SCButton, SCLink } from '../UI';
 import {
 	Avatar,
@@ -13,9 +18,8 @@ import {
 	Picture,
 	User,
 } from './Navbar.styled';
+
 import LogoImg from '../../assets/logo.webp';
-import { logout } from '../../redux/userSlice';
-import { Upload } from '../upload';
 
 export const Navbar = ({ children }) => {
 	const [isShown, setIsShown] = useState(false);
@@ -29,7 +33,7 @@ export const Navbar = ({ children }) => {
 	const dispatch = useDispatch();
 
 	const logOut = async () => {
-		axios.get(`/auth/logout`).then((resp) => {
+		api.get(`/auth/logout`).then((resp) => {
 			dispatch(logout());
 		});
 	};

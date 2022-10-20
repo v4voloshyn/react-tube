@@ -43,7 +43,9 @@
  -  - ✅ User
  -  - ✅ Auth
  -  - ✅ Comment
- - ✅ Implement next functionality:
+   <hr/>
+
+  ### 🔴 Implement next functionality:
 - #### 🟡 Auth:
  - - ✅ SignUp
  - - ✅ SignIn
@@ -75,6 +77,8 @@
  - ✅ Connect Redux for: 
  - - ✅ User data storage
  - - ✅ Video data storage
+ - ⬜ 🔴  Handle signin/login errors with toastify
+ - ⬜ 🔴  Handle upload videos with toastify
   
 <hr/>
 

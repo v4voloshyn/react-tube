@@ -1,5 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import ReactPlayer from 'react-player';
+import { format } from 'timeago.js';
+import {
+	ThumbUp,
+	ThumbDown,
+	Share,
+	ThumbUpAltOutlined,
+	ThumbDownAltOutlined,
+} from '@mui/icons-material';
+
+import {
+	dislikeVideo,
+	fetchVideoFailure,
+	fetchVideoStart,
+	fetchVideoSuccess,
+	likeVideo,
+} from '../../redux/videoSlice';
+import { subscribeOnChannel } from '../../redux/userSlice';
+import { api } from '../../axios/instance';
+
+import { Hr, ChannelImg } from '../../components/UI';
+import { Comments } from '../../components/comment';
+import { Recommendation } from '../../components/recommendation/Recommendation';
+
 import {
 	Content,
 	VideoContainer,
@@ -18,29 +43,6 @@ import {
 	ChannelDescr,
 } from './Video.styled';
 
-import {
-	ThumbUp,
-	ThumbDown,
-	Share,
-	ThumbUpAltOutlined,
-	ThumbDownAltOutlined,
-} from '@mui/icons-material';
-import { Hr, ChannelImg } from '../../components/UI';
-import { Comments } from '../../components/comment';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import axios from 'axios';
-import {
-	dislikeVideo,
-	fetchVideoFailure,
-	fetchVideoStart,
-	fetchVideoSuccess,
-	likeVideo,
-} from '../../redux/videoSlice';
-import { format } from 'timeago.js';
-import { subscribeOnChannel } from '../../redux/userSlice';
-import { Recommendation } from '../../components/recommendation/Recommendation';
-
 export const Video = () => {
 	const [channelData, setChannelData] = useState({});
 	const dispatch = useDispatch();
@@ -52,13 +54,13 @@ export const Video = () => {
 	const videoID = useLocation().pathname.split('/')[2];
 
 	const handleLike = async () => {
-		const res = await axios.put(`/users/like/${videoID}`);
+		const res = await api.put(`/users/like/${videoID}`);
 		if (res.statusText === 'OK') {
 			dispatch(likeVideo(currentUserID));
 		}
 	};
 	const handleDislike = async () => {
-		const res = await axios.put(`/users/dislike/${videoID}`);
+		const res = await api.put(`/users/dislike/${videoID}`);
 		if (res.statusText === 'OK') {
 			dispatch(dislikeVideo(currentUserID));
 		}
@@ -67,9 +69,9 @@ export const Video = () => {
 	const handleSubscribe = async () => {
 		let response;
 		if (currentUser.subscribedUsers.includes(channelData._id)) {
-			response = await axios.put(`/users/unsub/${channelData._id}`);
+			response = await api.put(`/users/unsub/${channelData._id}`);
 		} else {
-			response = await axios.put(`/users/sub/${channelData._id}`);
+			response = await api.put(`/users/sub/${channelData._id}`);
 		}
 		if (response.statusText === 'OK') {
 			dispatch(subscribeOnChannel(channelData._id));
@@ -81,8 +83,8 @@ export const Video = () => {
 
 		const fetchVideo = async () => {
 			try {
-				const videoResponse = await axios.get(`/videos/find/${videoID}`);
-				const channelResponse = await axios.get(`/users/find/${videoResponse.data.userId}`);
+				const videoResponse = await api.get(`/videos/find/${videoID}`);
+				const channelResponse = await api.get(`/users/find/${videoResponse.data.userId}`);
 
 				setChannelData(channelResponse.data);
 
