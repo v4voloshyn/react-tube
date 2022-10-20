@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Card } from '../../components';
-import { HomeContainer } from './Home.styled';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import { api } from '../../axios/instance';
+
+import { Card } from '../../components';
+
+import { HomeContainer } from './Home.styled';
 
 export const Home = ({ pageType }) => {
 	const [videos, setVideos] = useState([]);
@@ -16,7 +19,7 @@ export const Home = ({ pageType }) => {
 			navigate('/signin');
 		}
 		const getVideos = async () => {
-			const response = await axios.get(`/videos/${pageType}`);
+			const response = await api.get(`/videos/${pageType}`);
 			setVideos(response.data);
 		};
 

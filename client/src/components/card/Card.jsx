@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { format } from 'timeago.js';
+import { api } from '../../axios/instance';
+
+import { SCLink } from '../UI';
+
 import {
 	CardContainer,
 	CardDetails,
@@ -10,19 +15,15 @@ import {
 	Info,
 } from './Card.styled';
 
-import { format } from 'timeago.js';
-
 import CardPoster from '../../assets/post1.jpg';
 import ChannelAvatarImg from '../../assets/boriska.jpg';
-import { SCLink } from '../UI';
-import axios from 'axios';
 
 export const Card = ({ type, video = [] }) => {
 	const [channel, setChannel] = useState([]);
 
 	useEffect(() => {
 		const getChannelInfo = async () => {
-			const response = await axios.get(`/users/find/${video.userId}`);
+			const response = await api.get(`/users/find/${video.userId}`);
 			setChannel(response.data);
 		};
 

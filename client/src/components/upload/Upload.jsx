@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+
+import { uploadFile } from './helpers/uploadFile';
+import { api } from '../../axios/instance';
 
 import {
 	Button,
@@ -12,8 +14,6 @@ import {
 	Title,
 	Wrapper,
 } from './Upload.styled';
-
-import { uploadFile } from './helpers/uploadFile';
 
 export const Upload = ({ setIsShown }) => {
 	const [textInputs, setTextInputs] = useState({});
@@ -46,7 +46,7 @@ export const Upload = ({ setIsShown }) => {
 			uploadFile(image, setImagePerc),
 		]);
 
-		const res = await axios.post('/videos', { ...textInputs, videoUrl, imgUrl, tags });
+		const res = await api.post('/videos', { ...textInputs, videoUrl, imgUrl, tags });
 
 		if (res.status === 201) {
 			setIsShown(false);

@@ -1,7 +1,10 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+
+import { api } from '../../axios/instance';
+
 import { Card } from '../../components';
+
 import { Container } from './Search.styled';
 
 export const Search = () => {
@@ -11,7 +14,7 @@ export const Search = () => {
 
 	useEffect(() => {
 		const fetchVideos = async () => {
-			const res = await axios.get(`/videos/search${searchQuery}`);
+			const res = await api.get(`/videos/search${searchQuery}`);
 			setFoundVideos(res.data);
 		};
 

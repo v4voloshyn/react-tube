@@ -1,6 +1,7 @@
-import axios from 'axios';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { api } from '../../axios/instance';
+
 import { Card } from '../card';
 import { Container } from './Recommendation.styled';
 
@@ -9,7 +10,7 @@ export const Recommendation = ({ tags }) => {
 
 	useEffect(() => {
 		const fetchRecVideos = async () => {
-			const res = await axios.get(`/videos/tags?tags=${tags?.join(',')}`);
+			const res = await api.get(`/videos/tags?tags=${tags?.join(',')}`);
 			setRecomVideos(res.data);
 		};
 

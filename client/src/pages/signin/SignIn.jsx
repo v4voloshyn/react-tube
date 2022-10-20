@@ -1,4 +1,14 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInWithPopup } from 'firebase/auth';
+
+import { auth, provider } from '../../firebase';
+
+import { loginFailure, loginStart, loginSuccess } from '../../redux/userSlice';
+import { api } from '../../axios/instance';
+
+import { Hr } from '../../components/UI';
 import {
 	SignInButton,
 	SignInContainer,
@@ -7,15 +17,6 @@ import {
 	SignInTitle,
 	SignInWrapper,
 } from './SignIn.styled';
-
-import { Hr } from '../../components/UI';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginFailure, loginStart, loginSuccess } from '../../redux/userSlice';
-import { auth, provider } from '../../firebase';
-import { signInWithPopup } from 'firebase/auth';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export const SignIn = () => {
 	const [formData, setFormData] = useState({});
@@ -35,8 +36,10 @@ export const SignIn = () => {
 		dispatch(loginStart());
 		const { signin_username: name, signin_password: password } = formData;
 		try {
-			const response = await axios.post('/auth/signin', { name, password });
-
+			const response = await api.post('/auth/signin', { name, password });
+			if (response.status !== 200) {
+				throw new Error('message');
+			}
 			dispatch(loginSuccess(response.data));
 		} catch (error) {
 			console.log('errorMessage', error);
@@ -50,7 +53,7 @@ export const SignIn = () => {
 				dispatch(loginStart());
 				const user = result.user;
 
-				axios
+				api
 					.post('/auth/google', {
 						name: user.displayName,
 						email: user.email,

@@ -1,15 +1,16 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { CContainer, CWrapper } from './Comments.styled';
+import { useEffect, useState } from 'react';
+import { api } from '../../axios/instance';
 import { NewComment } from './NewComment';
 import { Comment } from './SingleComment';
+
+import { CContainer, CWrapper } from './Comments.styled';
 
 export const Comments = ({ videoID }) => {
 	const [comments, setComments] = useState([]);
 
 	useEffect(() => {
 		const fetchComments = async () => {
-			const resp = await axios.get(`/comments/${videoID}`);
+			const resp = await api.get(`/comments/${videoID}`);
 			setComments(resp.data);
 		};
 
