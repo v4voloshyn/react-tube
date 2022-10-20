@@ -43,7 +43,9 @@
  -  - ✅ User
  -  - ✅ Auth
  -  - ✅ Comment
- - ✅ Implement next functionality:
+   <hr/>
+
+  ### 🔴 Implement next functionality:
 - #### 🟡 Auth:
  - - ✅ SignUp
  - - ✅ SignIn
