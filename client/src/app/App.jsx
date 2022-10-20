@@ -8,6 +8,7 @@ import { AppContainer, AppMain, AppWrapper } from './App.styled';
 import { Route, Routes } from 'react-router-dom';
 import { Home, SignIn, Video, Search } from '../pages';
 import { useOnClickOutside } from '../hooks/useOnClickOutside';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
 	const [isDarkMode, setDarkMode] = useState(true);
@@ -60,18 +61,18 @@ export const App = () => {
 						</Routes>
 					</AppWrapper>
 				</AppMain>
+				<ToastContainer
+					position='bottom-right'
+					autoClose={3000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+					theme='dark'
+				/>
 			</AppContainer>
-			<ToastContainer
-				position='bottom-right'
-				autoClose={3000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-				theme='dark'
-			/>
 		</ThemeProvider>
 	);
 };

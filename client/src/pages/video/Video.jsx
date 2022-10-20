@@ -20,7 +20,7 @@ import {
 } from '../../redux/videoSlice';
 import { subscribeOnChannel } from '../../redux/userSlice';
 import { api } from '../../axios/instance';
-
+import { toast } from 'react-toastify';
 import { Hr, ChannelImg } from '../../components/UI';
 import { Comments } from '../../components/comment';
 import { Recommendation } from '../../components/recommendation/Recommendation';
@@ -54,12 +54,20 @@ export const Video = () => {
 	const videoID = useLocation().pathname.split('/')[2];
 
 	const handleLike = async () => {
+		if (!currentUserID) {
+			toast.error('Please, Sign in first');
+			return;
+		}
 		const res = await api.put(`/users/like/${videoID}`);
 		if (res.statusText === 'OK') {
 			dispatch(likeVideo(currentUserID));
 		}
 	};
 	const handleDislike = async () => {
+		if (!currentUserID) {
+			toast.error('Please, Sign in first');
+			return;
+		}
 		const res = await api.put(`/users/dislike/${videoID}`);
 		if (res.statusText === 'OK') {
 			dispatch(dislikeVideo(currentUserID));
@@ -67,6 +75,10 @@ export const Video = () => {
 	};
 
 	const handleSubscribe = async () => {
+		if (!currentUserID) {
+			toast.error('Please, Sign in first');
+			return;
+		}
 		let response;
 		if (currentUser.subscribedUsers.includes(channelData._id)) {
 			response = await api.put(`/users/unsub/${channelData._id}`);
