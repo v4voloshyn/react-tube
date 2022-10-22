@@ -5,8 +5,10 @@ export const SCLink = styled(Link)`
 	display: flex;
 	gap: 6px;
 	align-items: center;
+	justify-content: center;
 	font-family: inherit;
 	text-decoration: none;
+	background-color: transparent;
 	color: ${({ theme }) => theme.textColor};
 	cursor: pointer;
 	&:visited {

@@ -23,6 +23,7 @@ export const Search = () => {
 
 	return (
 		<Container>
+			{!foundVideos.length && <h1>No Videos by your query. Please try another.</h1>}
 			{foundVideos.map((video) => (
 				<Card key={video._id} video={video} />
 			))}

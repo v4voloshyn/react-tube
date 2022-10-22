@@ -4,7 +4,10 @@ export const VideoContainer = styled.div`
 	display: flex;
 	gap: 24px;
 	margin-top: 20px;
-	padding-left: 10px;
+	padding: 0 15px;
+	@media (max-width: 767.98px) {
+		flex-direction: column;
+	}
 `;
 
 export const Content = styled.div`

@@ -12,13 +12,11 @@ import {
 } from '@mui/icons-material';
 
 import {
-	cleanVideoError,
 	dislikeVideo,
 	fetchVideoFailure,
 	fetchVideoStart,
 	fetchVideoSuccess,
 	likeVideo,
-	setVideoError,
 } from '../../redux/videoSlice';
 import { loginFailure, loginStart, subscribeOnChannel } from '../../redux/userSlice';
 import { api } from '../../axios/instance';
