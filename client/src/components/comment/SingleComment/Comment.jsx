@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { format } from 'timeago.js';
 
+import { ThumbDownAltOutlined, ThumbUpAltOutlined } from '@mui/icons-material';
+
 import { api } from '../../../axios/instance';
+import { setFullURL } from './utils/setFullUrl';
 
 import {
 	AuthorImg,
@@ -11,10 +15,14 @@ import {
 	CommentInfo,
 	CommentText,
 	CommentContainer,
+	CommentActions,
+	CommentAction,
+	CommentPrivateActions,
 } from './Comment.styled';
 
 export const Comment = (comment) => {
 	const [commentUser, setCommentUser] = useState({});
+	const currentUserID = useSelector((state) => state.user.data._id);
 
 	useEffect(() => {
 		const fetchCommentAuthor = async () => {
@@ -24,10 +32,6 @@ export const Comment = (comment) => {
 
 		fetchCommentAuthor();
 	}, [comment.userId]);
-
-	const setFullURL = (url = '') => {
-		return url.includes('https://') || url.includes('http://') ? url : `https://${url}`;
-	};
 
 	return (
 		<CommentContainer>
@@ -39,6 +43,17 @@ export const Comment = (comment) => {
 						<CommentDate>{format(comment.createdAt)}</CommentDate>
 					</AuthorName>
 					<CommentText>{comment.text}</CommentText>
+					<CommentActions>
+						<ThumbUpAltOutlined />
+						<ThumbDownAltOutlined />
+						<CommentAction>Answer</CommentAction>
+						{currentUserID === comment.userId && (
+							<CommentPrivateActions>
+								<CommentAction>Edit</CommentAction>
+								<CommentAction>Delete</CommentAction>
+							</CommentPrivateActions>
+						)}
+					</CommentActions>
 				</CommentDetails>
 			</CommentInfo>
 		</CommentContainer>
