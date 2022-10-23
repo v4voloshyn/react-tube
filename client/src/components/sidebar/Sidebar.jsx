@@ -1,6 +1,4 @@
-import React from 'react';
-import { Container, Img, Item, Login, Title, Wrapper } from './Sidebar.styled';
-import LogoImg from '../../assets/logo.webp';
+import { useSelector } from 'react-redux';
 import {
 	Home as HomeIcon,
 	Explore,
@@ -19,15 +17,19 @@ import {
 	SettingsBrightness,
 	Person,
 } from '@mui/icons-material';
-import { SCLink, Hr, LinkBtn, Logo } from '../UI';
-import { useSelector } from 'react-redux';
 
-export const Sidebar = ({ changeTheme, isDarkMode, open, menuRef }) => {
+import { Container, Img, Item, Login, Title, Wrapper } from './Sidebar.styled';
+import { SCLink, Hr, LinkBtn, Logo } from '../UI';
+
+import LogoImg from '../../assets/logo.webp';
+
+export const Sidebar = ({ changeTheme, isDarkMode, open, children }) => {
 	const userData = useSelector((state) => state.user.data);
 
 	return (
-		<Container open={open} ref={menuRef}>
+		<Container open={open}>
 			<Wrapper>
+				{children}
 				<Logo>
 					<SCLink to='/'>
 						<Img src={LogoImg} /> UATube
