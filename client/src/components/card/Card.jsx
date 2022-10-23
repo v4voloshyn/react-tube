@@ -17,8 +17,9 @@ import {
 
 import CardPoster from '../../assets/post1.jpg';
 import ChannelAvatarImg from '../../assets/boriska.jpg';
+import { Skeleton } from '../UI/Skeleton/Skeleton';
 
-export const Card = ({ type, video = [] }) => {
+export const Card = ({ type, video = [], skeleton }) => {
 	const [channel, setChannel] = useState([]);
 
 	useEffect(() => {
@@ -31,8 +32,18 @@ export const Card = ({ type, video = [] }) => {
 			}
 		};
 
-		getChannelInfo();
+		if (video.userId) {
+			getChannelInfo();
+		}
 	}, [video.userId]);
+
+	if (skeleton && type !== 'sm') {
+		return (
+			<CardContainer type={type}>
+				<Skeleton />
+			</CardContainer>
+		);
+	}
 
 	return (
 		<SCLink to={`/video/${video._id}`}>
