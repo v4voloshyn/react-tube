@@ -21,6 +21,12 @@ export const getComments = async (req, res, next) => {
 // @route POST '/api/v1/comments/'
 // @acces Private
 export const addComment = async (req, res, next) => {
+	if(!req.body.text){
+		return next(createError(400, 'Please, write any thoughts about this video'))
+	}
+	if(!req.body.videoId){
+		return next(createError(400, 'Video ID is required'))
+	}
 	const newComment = new CommentModel({
 		...req.body,
 		userId: req.user.id,
@@ -42,6 +48,10 @@ export const deleteComment = async (req, res, next) => {
 	try {
 		const comment = await CommentModel.findById(req.params.id);
 		const video = await VideoModel.findById(comment.videoId);
+
+		if(!comment || !video){
+			return next(createError(404, 'Comment or video not found'));
+		}
 
 		if (req.user.id === comment.userId || req.user.id === video.userId) {
 			await CommentModel.findByIdAndDelete(req.params.id);
