@@ -16,7 +16,6 @@ export const Container = styled.div`
 	position: fixed;
 	top: 0;
 	left: 0;
-	flex: 1;
 	background-color: ${({ theme }) => theme.bgLighterColor};
 	min-width: 240px;
 	max-width: 300px;
@@ -26,13 +25,13 @@ export const Container = styled.div`
 	overflow-y: auto;
 	transition: transform 0.3s ease-in-out;
 	transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(-100%)')};
-	z-index: 1;
+	z-index: 10;
 `;
 
 export const Wrapper = styled.div`
-	padding: 12px 20px 20px 20px;
-	& ${SCLink}:nth-child(2) {
-		margin-top: 20px;
+	padding: 15px 20px 20px 20px;
+	& ${SCLink}:nth-child(3) {
+		margin-top: 25px;
 	}
 
 	& > ${SCLink}:hover, & > ${SCLink}:focus {
@@ -53,7 +52,6 @@ export const Title = styled.h2`
 `;
 
 export const Logo = styled.div`
-	margin-bottom: 20px;
 	display: flex;
 	align-items: center;
 	gap: 5px;

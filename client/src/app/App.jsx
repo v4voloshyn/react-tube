@@ -16,15 +16,17 @@ import 'react-toastify/dist/ReactToastify.css';
 export const App = () => {
 	const [isDarkMode, setDarkMode] = useState(true);
 	const [open, setOpen] = useState(false);
-	const burgerRef = useRef(null);
+	const burgerCloseRef = useRef(null);
+	const overlayRef = useRef(null);
+
 	const { error: userError, errorMessage: userErrorMessage } = useSelector((state) => state.user);
 	const { error: videoError, errorMessage: videoErrorMessage } = useSelector(
 		(state) => state.video
 	);
 
-	const currentTheme = isDarkMode ? darkTheme : lightTheme;
+	useOnClickOutside(overlayRef, () => setOpen(false));
 
-	useOnClickOutside(burgerRef, () => setOpen(false));
+	const currentTheme = isDarkMode ? darkTheme : lightTheme;
 
 	const changeThemeMode = useCallback(() => {
 		localStorage.getItem('tube_theme') === 'dark'
@@ -45,13 +47,20 @@ export const App = () => {
 
 	return (
 		<ThemeProvider theme={currentTheme}>
-			<Sidebar changeTheme={changeThemeMode} isDarkMode={isDarkMode} open={open} />
 			<AppContainer>
-				<AppMain>
+				<Sidebar changeTheme={changeThemeMode} isDarkMode={isDarkMode} open={open}>
+					<Burger
+						open={open}
+						setOpen={setOpen}
+						overlayRef={overlayRef}
+						burgerRef={burgerCloseRef}
+					/>
+				</Sidebar>
+				<AppMain overlay={open} ref={overlayRef}>
 					<Navbar>
-						<Burger open={open} setOpen={setOpen} burgerRef={burgerRef} />
+						<Burger setOpen={setOpen} />
 					</Navbar>
-					<AppWrapper>
+					<AppWrapper overlay={open}>
 						<Routes>
 							<Route path='/'>
 								<Route index element={<Home pageType={'random'} />} />
