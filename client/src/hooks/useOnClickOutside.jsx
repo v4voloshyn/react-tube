@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 export const useOnClickOutside = (overlay, handler) => {
 	useEffect(() => {
 		const listener = (event) => {
-			console.log('e.target', event.target);
 			if (overlay.current && overlay.current.contains(event.target)) {
 				handler(event);
 				return;
