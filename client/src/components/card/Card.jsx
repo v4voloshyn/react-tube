@@ -23,8 +23,12 @@ export const Card = ({ type, video = [] }) => {
 
 	useEffect(() => {
 		const getChannelInfo = async () => {
-			const response = await api.get(`/users/find/${video.userId}`);
-			setChannel(response.data);
+			try {
+				const response = await api.get(`/users/find/${video.userId}`);
+				setChannel(response.data);
+			} catch (error) {
+				console.log(error);
+			}
 		};
 
 		getChannelInfo();

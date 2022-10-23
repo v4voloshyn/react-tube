@@ -7,6 +7,7 @@ export const CommentContainer = styled.div`
 
 export const CommentInfo = styled.div`
 	display: flex;
+	width: 100%;
 	column-gap: 10px;
 	justify-content: space-between;
 `;
@@ -24,6 +25,7 @@ export const AuthorImg = styled.img`
 export const CommentDetails = styled.div`
 	display: flex;
 	flex-direction: column;
+	flex: 1 1 auto;
 	gap: 5px;
 	color: ${({ theme }) => theme.textColor};
 `;
@@ -44,4 +46,28 @@ export const CommentText = styled.p`
 	/*padding-top: 5px;*/
 	font-size: 0.9rem;
 	font-weight: 300;
+`;
+
+export const CommentActions = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex: 1 1 auto;
+	color: ${({ theme }) => theme.textColor};
+`;
+export const CommentPrivateActions = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	color: ${({ theme }) => theme.textColor};
+`;
+
+export const CommentAction = styled.span`
+	color: ${({ theme }) => theme.textColor};
+	font-size: 0.8rem;
+	font-weight: 500;
+	cursor: pointer;
+	&:hover {
+		text-decoration: underline;
+	}
 `;

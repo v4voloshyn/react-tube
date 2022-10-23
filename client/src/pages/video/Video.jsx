@@ -173,7 +173,7 @@ export const Video = () => {
 					</SubscribeBtn>
 				</Channel>
 				<Hr />
-				<Comments videoID={videoID} />
+				<Comments videoID={videoID} currentUserID={currentUserID} />
 			</Content>
 			<Recommendation tags={currentVideo.tags} />
 		</VideoContainer>

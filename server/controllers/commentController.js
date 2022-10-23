@@ -21,6 +21,12 @@ export const getComments = async (req, res, next) => {
 // @route POST '/api/v1/comments/'
 // @acces Private
 export const addComment = async (req, res, next) => {
+	if(!req.body.text){
+		return next(createError(400, 'Please, write any thoughts about this video'))
+	}
+	if(!req.body.videoId){
+		return next(createError(400, 'Video ID is required'))
+	}
 	const newComment = new CommentModel({
 		...req.body,
 		userId: req.user.id,
@@ -35,6 +41,31 @@ export const addComment = async (req, res, next) => {
 	}
 };
 
+// @desc  Update comment
+// @route PUT '/api/v1/comments/:commentID'
+// @acces Private
+export const updateComment = async (req, res, next) => {
+	if(!req.body.text){
+		return next(createError(400, 'You can`t leave empty comment'))
+	}
+
+	try {
+		const comment = await CommentModel.findById(req.params.commentID);
+		if(!comment){
+			return next(createError(404, 'Comment not found'));
+		}
+
+		if (req.user.id === comment.userId) {
+			const updatedCommment = await CommentModel.findByIdAndUpdate(req.params.commentID, req.body);
+			res.status(200).json(updatedCommment);
+		} else {
+			return next(createError(403, 'You have no rights to update this comment'));
+		}
+	} catch (error) {
+		next(error);
+	}
+};
+
 // @desc  Delete comment
 // @route DELETE '/api/v1/comments/:id'
 // @acces Private
@@ -42,6 +73,10 @@ export const deleteComment = async (req, res, next) => {
 	try {
 		const comment = await CommentModel.findById(req.params.id);
 		const video = await VideoModel.findById(comment.videoId);
+
+		if(!comment || !video){
+			return next(createError(404, 'Comment or video not found'));
+		}
 
 		if (req.user.id === comment.userId || req.user.id === video.userId) {
 			await CommentModel.findByIdAndDelete(req.params.id);

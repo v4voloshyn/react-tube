@@ -4,6 +4,7 @@ import { NewComment } from './NewComment';
 import { Comment } from './SingleComment';
 
 import { CContainer, CWrapper } from './Comments.styled';
+import { Hr } from '../UI';
 
 export const Comments = ({ videoID }) => {
 	const [comments, setComments] = useState([]);
@@ -19,11 +20,12 @@ export const Comments = ({ videoID }) => {
 
 	return (
 		<CContainer>
-			<NewComment />
+			<NewComment videoID={videoID} type='create' />
 			<CWrapper>
 				{!comments?.length && <h3 style={{ margin: 'auto' }}>Add your first comment</h3>}
-				{comments && comments.map((comment) => <Comment {...comment} key={comment._id} />)}
+				{comments && comments.map((comment) => <Comment key={comment._id} {...comment} />)}
 			</CWrapper>
+			<Hr />
 		</CContainer>
 	);
 };
