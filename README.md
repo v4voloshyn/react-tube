@@ -24,8 +24,8 @@
  - ✅ Add Burger component
  - ✅ Make Nav Sidebar absolute with slide effect
  - ⬜ Be good to do:
- - - ⬜ Add Overlay when Sidebar is open
- - - ⬜ Prevent outside click and scroll Sidebar is open
+ - - ✅ Add Overlay when Sidebar is open
+ - - ➖ Prevent outside click and scroll Sidebar is open
  - - ⬜ Make Main page with Cards using Grid-flow instead of Flexbox
  - ⬜ Reduce styles by creating reusable UI-Components (need to determine)
 
@@ -69,9 +69,9 @@
  - - ⬜ Incresase view count
  - #### 🟡 Comment:
  - - ✅ Get comments for current video
- - - ⬜ Add comment
- - - ⬜ Edit comment
- - - ⬜ Delete comment
+ - - ✅ Add comment
+ - - ✅ Edit comment
+ - - ✅ Delete comment
 
 🔶 **General:**
  - ✅ Connect Redux for: 
