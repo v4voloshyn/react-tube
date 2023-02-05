@@ -7,6 +7,7 @@ import { api } from '../../../axios/instance';
 import { toast } from 'react-toastify';
 import { useLocation } from 'react-router-dom';
 import { cancelBtn } from '../../../utils/theme';
+import ChannelAvatarImg from '../../../assets/avatar.png';
 
 export const NewComment = ({ type, textToEdit, setEdit, commentID }) => {
 	const [commentText, setCommentText] = useState(textToEdit || '');
@@ -45,7 +46,7 @@ export const NewComment = ({ type, textToEdit, setEdit, commentID }) => {
 		return (
 			<NCContainer>
 				<NCWrapper>
-					<ChannelImg src={currentUser?.img || ''} />
+					<ChannelImg src={currentUser?.img || ChannelAvatarImg} />
 					<NCInput
 						placeholder='Add your comment...'
 						value={commentText}
