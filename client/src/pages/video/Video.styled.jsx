@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const VideoContainer = styled.div`
+	min-height: 100vh;
 	display: flex;
 	gap: 24px;
 	margin-top: 20px;
@@ -20,7 +21,7 @@ export const Recomendations = styled.div`
 `;
 
 export const VideoBody = styled.div`
-	max-height: 50vh;
+	height: 75vh;
 	width: 100%;
 	aspect-ratio: 16 / 9;
 `;
