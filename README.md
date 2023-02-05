@@ -1,7 +1,7 @@
  # Video-hosting
  ## Written with React as a frontend side and Node+Express as a backend side
  
- Preview link : [Click](https://ua-tube.herokuapp.com/)
+ Preview link : [Click](https://uatube.onrender.com/)
  =====
 
  ### Tech stack:

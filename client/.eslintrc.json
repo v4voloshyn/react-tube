@@ -4,8 +4,7 @@
         "es2021": true
     },
     "extends": [
-        "react-app",
-        "prettier"
+        "react-app"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -15,27 +14,7 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react",
-        "prettier"
+        "react"
     ],
-    "rules": {
-        "prettier/prettier": [
-            "error",
-            {
-                "printWidth": 100,
-                "trailingComma": "es5",
-                "semi": true,
-                "jsxSingleQuote": true,
-                "singleQuote": true,
-                "useTabs": true,
-                "endOfLine": "auto",
-                "max-len": [
-                    "error",
-                    {
-                        "code": 100
-                    }
-                ]
-            }
-        ]
-    }
+    "rules": {}
 }
