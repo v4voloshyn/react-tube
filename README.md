@@ -84,6 +84,7 @@
 -  ✅ Signin/login errors with toastify
  - ⬜ Upload videos with toastify
  - ⬜ Google Auth error when close SignIn with Google popup
+ - ⬜ Extract business logic (async interaction with the server) from components into redux-thunk
   
 <hr/>
 
